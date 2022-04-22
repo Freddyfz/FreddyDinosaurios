@@ -11,26 +11,11 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class EspecieDto {
+public class TipoAlimentacionDto {
 
 	@NotNull
 	private Long id;
 	
 	@NotNull
-	private Long idFamilia;
-	
-	@NotNull
-	private String nombre;
-	
-	@NotNull
-	private String codigoTipoPeligrosidad;
-	
-	@NotNull
-	private int longitud;
-	
-	@NotNull
-	private int anioDesde;
-	
-	@NotNull
-	private int anioHasta;
+	private String descripcion;
 }
