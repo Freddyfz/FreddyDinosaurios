@@ -15,6 +15,7 @@
 	<description>Project for Spring Boot</description>
 	<properties>
 		<java.version>11</java.version>
+		<dbunit.version>2.5.4</dbunit.version>
 	</properties>
 	<dependencies>
 	
@@ -101,6 +102,22 @@
 			<artifactId>mapstruct</artifactId>
 			<version>1.4.2.Final</version>
 		</dependency>
+		
+		<dependency>
+			<groupId>org.hsqldb</groupId>
+			<artifactId>hsqldb</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.dbunit</groupId>
+			<artifactId>dbunit</artifactId>
+			<scope>test</scope>
+			<version>${dbunit.version}</version>
+		</dependency>
+		
+		
+		
 	</dependencies>
 
 	<build>
