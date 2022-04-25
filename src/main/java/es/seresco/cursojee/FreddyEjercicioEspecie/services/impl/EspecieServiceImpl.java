@@ -31,6 +31,7 @@ public class EspecieServiceImpl implements EspecieService{
 		log.info("Usando bean {}, para obtener especie {}", BEAN_NAME, idEspecie);
 		return especieMapper.especieToEspecieDto(especieRepository.getById(idEspecie));
 	}
+	
 
 	@Override
 	public EspecieDto create(NewEspecieDto newEspecie) {
