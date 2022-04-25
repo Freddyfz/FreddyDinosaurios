@@ -25,9 +25,15 @@ public class EspecieServiceImpl implements EspecieService{
 	}
 
 	@Override
+<<<<<<< Updated upstream
 	public List<EspecieDto> findEspeciees() throws MiValidationException {
 		// TODO Auto-generated method stub
 		return null;
+=======
+	public List<EspecieDto> findEspecies() throws MiValidationException {
+		log.info("Usando bean {}, para buscar especiees", BEAN_NAME);
+		return especieMapper.especieTomapEspecieDtoList(especieRepository.findAll());
+>>>>>>> Stashed changes
 	}
 
 	@Override
