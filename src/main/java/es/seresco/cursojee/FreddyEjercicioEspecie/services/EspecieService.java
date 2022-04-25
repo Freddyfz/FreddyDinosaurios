@@ -12,7 +12,7 @@ public interface EspecieService {
 	
 	EspecieDto create(NewEspecieDto newEspecie);
 	
-	List<EspecieDto> findEspeciees () throws MiValidationException;
+	List<EspecieDto> findEspecies () throws MiValidationException;
 	
 	EspecieDto updateEspecie(Long idEspecie, NewEspecieDto updatedEspecie) throws MiValidationException;
 

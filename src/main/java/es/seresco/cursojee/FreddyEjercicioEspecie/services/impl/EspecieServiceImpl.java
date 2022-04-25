@@ -42,7 +42,7 @@ public class EspecieServiceImpl implements EspecieService{
 	}
 
 	@Override
-	public List<EspecieDto> findEspeciees() throws MiValidationException {
+	public List<EspecieDto> findEspecies() throws MiValidationException {
 		log.info("Usando bean {}, para buscar especiees", BEAN_NAME);
 		return especieMapper.especieTomapEspecieDtoList(especieRepository.findAll());
 	}
