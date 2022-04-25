@@ -23,8 +23,8 @@ import es.seresco.cursojee.FreddyEjercicioEspecie.services.EspecieService;
 @RunWith(SpringRunner.class)
 @DirtiesContext(classMode = ClassMode.AFTER_CLASS)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK, classes = Application.class)
-@TestPropertySource(locations = "classpath:application-test.yml")
-public class EspecieServiceTestCase {
+@TestPropertySource(locations = "classpath:data-test.yml")
+public class EspecieServiceTestCase extends AbstractServiceTestCase{
 
 	@Autowired
 	private EspecieService especieService;
@@ -34,6 +34,6 @@ public class EspecieServiceTestCase {
 	public void testFindAll() throws MiValidationException {
 		List<EspecieDto> resultado= especieService.findEspecies();
 		assertNotNull(resultado);
-		assertEquals("Se esperan 3 familias", 3, resultado.size());
+		assertEquals("Se esperan 3 especies", 1, resultado.size());
 	}
 }

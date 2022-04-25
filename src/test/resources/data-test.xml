@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+
+	<Especie ID="1001" 	id_familia="1001" nombre="Diplodocus" codigo_tipo_peligrosidad="BAJA" longitud="50" anio_desde="2000000" anio_hasta="1999000"/>
+
+
+</dataset>
