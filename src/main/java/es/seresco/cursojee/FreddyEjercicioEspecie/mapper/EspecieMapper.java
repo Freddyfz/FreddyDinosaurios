@@ -2,6 +2,7 @@ package es.seresco.cursojee.FreddyEjercicioEspecie.mapper;
 
 import java.util.List;
 
+import org.mapstruct.InheritConfiguration;
 import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -25,12 +26,7 @@ public interface EspecieMapper {
 	public NewEspecieDto especieTonewEspecieDto(Especie especie);
 	
 	@Mapping(source="id",target="id")
-	@Mapping(source="idFamilia",target="familia.id")
-	@Mapping(source="nombre",target="nombre")
-	@Mapping(source="codigoTipoPeligrosidad",target="codigoTipoPeligrosidad")
-	@Mapping(source="longitud",target="longitud")
-	@Mapping(source="anioDesde",target="anio_desde")
-	@Mapping(source="anioHasta",target="anio_hasta")
+	@InheritConfiguration(name="newEspecieDtoToEspecie")
 	public Especie especieDtoToEspecie(EspecieDto especieDto);
 	
 	@InheritInverseConfiguration

@@ -34,6 +34,6 @@ public class EspecieServiceTestCase extends AbstractServiceTestCase{
 	public void testFindAll() throws MiValidationException {
 		List<EspecieDto> resultado= especieService.findEspecies();
 		assertNotNull(resultado);
-		assertEquals("Se esperan 3 especies", 1, resultado.size());
+		assertEquals("Se esperan 8 especies", 8, resultado.size());
 	}
 }
