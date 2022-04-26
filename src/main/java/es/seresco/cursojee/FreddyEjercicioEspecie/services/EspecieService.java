@@ -7,6 +7,8 @@ import es.seresco.cursojee.FreddyEjercicioEspecie.controller.dto.NewEspecieDto;
 import es.seresco.cursojee.FreddyEjercicioEspecie.exceptions.MiValidationException;
 
 public interface EspecieService {
+	
+	public static final String BEAN_NAME = "especieService";
 
 	EspecieDto getEspecie(Long idEspecie);
 	

@@ -18,8 +18,8 @@ public interface EspecieMapper {
 	@Mapping(source="nombre",target="nombre")
 	@Mapping(source="codigoTipoPeligrosidad",target="codigoTipoPeligrosidad")
 	@Mapping(source="longitud",target="longitud")
-	@Mapping(source="anioDesde",target="anioDesde")
-	@Mapping(source="anioHasta",target="anioHasta")
+	@Mapping(source="anioDesde",target="anio_desde")
+	@Mapping(source="anioHasta",target="anio_hasta")
 	public Especie newEspecieDtoToEspecie(NewEspecieDto newEspecieDto);
 	
 	@InheritInverseConfiguration

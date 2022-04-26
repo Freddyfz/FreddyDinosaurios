@@ -1,7 +1,7 @@
 package es.seresco.cursojee.FreddyEjercicioEspecie.service.impl;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.util.List;
 
@@ -23,7 +23,7 @@ import es.seresco.cursojee.FreddyEjercicioEspecie.services.EspecieService;
 @RunWith(SpringRunner.class)
 @DirtiesContext(classMode = ClassMode.AFTER_CLASS)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK, classes = Application.class)
-@TestPropertySource(locations = "classpath:data-test.yml")
+@TestPropertySource(locations = "classpath:application-test.properties")
 public class EspecieServiceTestCase extends AbstractServiceTestCase{
 
 	@Autowired
