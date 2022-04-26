@@ -13,11 +13,9 @@ import es.seresco.cursojee.FreddyEjercicioEspecie.repository.FamiliaRepository;
 import es.seresco.cursojee.FreddyEjercicioEspecie.services.FamiliaService;
 import lombok.extern.slf4j.Slf4j;
 
-@Service
+@Service(FamiliaService.BEAN_NAME)
 @Slf4j
 public class FamiliaServiceImpl implements FamiliaService{
-
-private static final String BEAN_NAME = "FamiliaServiceImpl";
 	
 	@Autowired
 	private FamiliaRepository familiaRepository;

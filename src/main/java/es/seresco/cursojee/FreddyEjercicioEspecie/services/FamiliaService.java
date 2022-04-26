@@ -7,6 +7,8 @@ import es.seresco.cursojee.FreddyEjercicioEspecie.controller.dto.NewFamiliaDto;
 import es.seresco.cursojee.FreddyEjercicioEspecie.exceptions.MiValidationException;
 
 public interface FamiliaService {
+	
+	public static final String BEAN_NAME = "FamiliaServiceImpl";
 
 	FamiliaDto getFamilia(Long idFamilia);
 	

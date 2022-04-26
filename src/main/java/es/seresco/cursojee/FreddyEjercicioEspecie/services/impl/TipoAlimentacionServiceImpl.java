@@ -13,11 +13,9 @@ import es.seresco.cursojee.FreddyEjercicioEspecie.repository.TipoAlimentacionRep
 import es.seresco.cursojee.FreddyEjercicioEspecie.services.TipoAlimentacionService;
 import lombok.extern.slf4j.Slf4j;
 
-@Service
+@Service(TipoAlimentacionService.BEAN_NAME)
 @Slf4j
 public class TipoAlimentacionServiceImpl implements TipoAlimentacionService{
-
-private static final String BEAN_NAME = "TipoAlimentacionServiceImpl";
 	
 	@Autowired
 	private TipoAlimentacionRepository tipoAlimentacionRepository;

@@ -7,6 +7,8 @@ import es.seresco.cursojee.FreddyEjercicioEspecie.controller.dto.TipoAlimentacio
 import es.seresco.cursojee.FreddyEjercicioEspecie.exceptions.MiValidationException;
 
 public interface TipoAlimentacionService {
+	
+	public static final String BEAN_NAME = "TipoAlimentacionServiceImpl";
 
 	TipoAlimentacionDto getTipoAlimentacion(Long idTipoAlimentacion);
 	

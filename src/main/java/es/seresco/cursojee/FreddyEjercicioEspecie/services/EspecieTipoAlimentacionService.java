@@ -8,6 +8,8 @@ import es.seresco.cursojee.FreddyEjercicioEspecie.model.EspecieTipoAlimentacion;
 import es.seresco.cursojee.FreddyEjercicioEspecie.model.EspecieTipoAlimentacionPK;
 
 public interface EspecieTipoAlimentacionService {
+	
+	public static final String BEAN_NAME = "EspecieTipoAlimentacionServiceImpl";
 
 	EspecieTipoAlimentacionDto getEspecieTipoAlimentacion(EspecieTipoAlimentacionPK especieTipoAlimentacionPK);
 	
