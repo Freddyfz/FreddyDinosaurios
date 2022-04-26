@@ -7,8 +7,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import lombok.Getter;
@@ -30,10 +28,8 @@ public class Ejemplar implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@ToString.Exclude
-	@ManyToOne
-    @JoinColumn(name = "ID_ESPECIE", insertable = false, updatable = false)
-    private Especie especie;
+	@Column(name = "ID_ESPECIE")
+    private Long idEspecie;
 	
 	@Column(name = "NOMBRE",length = 50)
 	private String nombre;
@@ -41,8 +37,6 @@ public class Ejemplar implements Serializable{
 	@Column(name = "SEXO",length = 50)
 	private String sexo;
 	
-	@ToString.Exclude
-	@ManyToOne
-    @JoinColumn(name = "ID_RECINTO", insertable = false, updatable = false)
-    private Recinto recinto;
+    @Column(name = "ID_RECINTO")
+    private Long idRecinto;
 }

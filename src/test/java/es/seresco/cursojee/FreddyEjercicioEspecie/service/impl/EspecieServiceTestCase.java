@@ -30,7 +30,7 @@ public class EspecieServiceTestCase extends AbstractServiceTestCase{
 	private EspecieService especieService;
 	
 	@Test
-	@DisplayName("Obtener todas las familias de dinosaurios")
+	@DisplayName("Obtener todas las especies de dinosaurios")
 	public void testFindAll() throws MiValidationException {
 		List<EspecieDto> resultado= especieService.findEspecies();
 		assertNotNull(resultado);

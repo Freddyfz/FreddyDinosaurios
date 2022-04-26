@@ -19,7 +19,7 @@ import lombok.ToString;
 @ToString
 @NoArgsConstructor
 @Entity
-@Table(name = "Tipo_Alimentacion")
+@Table(name = "TIPO_ALIMENTACION")
 public class TipoAlimentacion implements Serializable{
 
 	private static final long serialVersionUID = -4058798229966431708L;
@@ -30,4 +30,5 @@ public class TipoAlimentacion implements Serializable{
 	
 	@Column(name="descripcion",length = 50)
 	private String descripcion;
+	
 }

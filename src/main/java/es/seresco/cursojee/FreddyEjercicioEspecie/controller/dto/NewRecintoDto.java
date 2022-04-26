@@ -14,10 +14,10 @@ import lombok.Setter;
 public class NewRecintoDto {
 
 	@NotNull
-	private Long Codigo;
+	private Long codigo;
 	
 	@NotNull
-	private String Descripcion;
+	private String descripcion;
 	
 	@NotNull
 	private Long idTipoAlimentacion;

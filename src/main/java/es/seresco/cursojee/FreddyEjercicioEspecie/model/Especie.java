@@ -21,7 +21,7 @@ import lombok.ToString;
 @ToString
 @NoArgsConstructor
 @Entity
-@Table(name = "Especie")
+@Table(name = "ESPECIE")
 public class Especie implements Serializable{
 
 	/**
@@ -52,4 +52,5 @@ public class Especie implements Serializable{
 	
 	@Column(name = "anio_hasta",length = 3)
 	private int anio_hasta;
+
 }

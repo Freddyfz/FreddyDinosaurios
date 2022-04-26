@@ -12,8 +12,9 @@ import es.seresco.cursojee.FreddyEjercicioEspecie.model.EspecieTipoAlimentacion;
 @Mapper(componentModel = "spring")
 public interface EspecieTipoAlimentacionMapper {
 
-	@Mapping(source="idEspecie",target="especie.id")
-	@Mapping(source="idTipoAlimentacion",target="tipoAlimentacion.id")
+	@Mapping(source="id",target="id")
+	@Mapping(source="idEspecie",target="idEspecie")
+	@Mapping(source="idTipoAlimentacion",target="idTipoAlimentacion")
 	public EspecieTipoAlimentacion especieTipoAlimentacionDtoToEspecieTipoAlimentacion(EspecieTipoAlimentacionDto especieTipoAlimentacionDto);
 	
 	@InheritInverseConfiguration

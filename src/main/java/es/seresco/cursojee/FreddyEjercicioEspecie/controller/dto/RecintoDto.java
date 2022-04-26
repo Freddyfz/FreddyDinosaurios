@@ -17,10 +17,10 @@ public class RecintoDto {
 	private Long id;
 	
 	@NotNull
-	private Long Codigo;
+	private Long codigo;
 	
 	@NotNull
-	private String Descripcion;
+	private String descripcion;
 	
 	@NotNull
 	private Long idTipoAlimentacion;
