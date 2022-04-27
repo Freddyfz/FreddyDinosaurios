@@ -54,4 +54,10 @@ public class RecintoServiceTestCase extends AbstractServiceTestCase{
 		assertNotNull(resultado);
 		assertEquals("Se esperan 3 recintos", 6, resultado.size());
 	}
+	
+	@Test
+	@DisplayName("Eliminar recinto")
+	public void testDelete()throws MiValidationException{
+		recintoService.deleteRecinto(1L);
+	}
 }
