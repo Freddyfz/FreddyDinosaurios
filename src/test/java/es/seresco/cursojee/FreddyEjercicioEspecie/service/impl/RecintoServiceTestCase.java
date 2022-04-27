@@ -1,9 +1,6 @@
 package es.seresco.cursojee.FreddyEjercicioEspecie.service.impl;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-
-import java.util.List;
+import static org.junit.Assert.assertNotNull;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -15,25 +12,24 @@ import org.springframework.test.annotation.DirtiesContext.ClassMode;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import es.seresco.cursojee.FreddyEjercicioEspecie.controller.dto.EspecieDto;
+import es.seresco.cursojee.FreddyEjercicioEspecie.controller.dto.NewRecintoDto;
 import es.seresco.cursojee.FreddyEjercicioEspecie.core.Application;
 import es.seresco.cursojee.FreddyEjercicioEspecie.exceptions.MiValidationException;
-import es.seresco.cursojee.FreddyEjercicioEspecie.services.EspecieService;
+import es.seresco.cursojee.FreddyEjercicioEspecie.services.RecintoService;
 
 @RunWith(SpringRunner.class)
 @DirtiesContext(classMode = ClassMode.AFTER_CLASS)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK, classes = Application.class)
 @TestPropertySource(locations = "classpath:application-test.properties")
-public class EspecieServiceTestCase extends AbstractServiceTestCase{
+public class RecintoServiceTestCase {
 
 	@Autowired
-	private EspecieService especieService;
+	private RecintoService recintoService;
 	
 	@Test
-	@DisplayName("Obtener todas las especies de dinosaurios")
-	public void testFindAll() throws MiValidationException {
-		List<EspecieDto> resultado= especieService.findEspecies();
-		assertNotNull(resultado);
-		assertEquals("Se esperan 8 especies", 8, resultado.size());
+	@DisplayName("Crear Recinto")
+	public void testCreate()throws MiValidationException{
+		NewRecintoDto newRecinto=new NewRecintoDto();
+		assertNotNull(recintoService.create(newRecinto));
 	}
 }

@@ -15,25 +15,25 @@ import org.springframework.test.annotation.DirtiesContext.ClassMode;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import es.seresco.cursojee.FreddyEjercicioEspecie.controller.dto.EspecieDto;
+import es.seresco.cursojee.FreddyEjercicioEspecie.controller.dto.FamiliaDto;
 import es.seresco.cursojee.FreddyEjercicioEspecie.core.Application;
 import es.seresco.cursojee.FreddyEjercicioEspecie.exceptions.MiValidationException;
-import es.seresco.cursojee.FreddyEjercicioEspecie.services.EspecieService;
+import es.seresco.cursojee.FreddyEjercicioEspecie.services.FamiliaService;
 
 @RunWith(SpringRunner.class)
 @DirtiesContext(classMode = ClassMode.AFTER_CLASS)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK, classes = Application.class)
 @TestPropertySource(locations = "classpath:application-test.properties")
-public class EspecieServiceTestCase extends AbstractServiceTestCase{
+public class FamiliaServiceTestCase {
 
 	@Autowired
-	private EspecieService especieService;
+	private FamiliaService familiaService;
 	
 	@Test
-	@DisplayName("Obtener todas las especies de dinosaurios")
+	@DisplayName("Obtener todas las familias de dinosaurios")
 	public void testFindAll() throws MiValidationException {
-		List<EspecieDto> resultado= especieService.findEspecies();
+		List<FamiliaDto> resultado= familiaService.findFamilias();
 		assertNotNull(resultado);
-		assertEquals("Se esperan 8 especies", 8, resultado.size());
+		assertEquals("Se esperan 3 familias", 1, resultado.size());
 	}
 }

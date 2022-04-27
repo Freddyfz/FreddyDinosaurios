@@ -37,6 +37,7 @@ public class EjemplarServiceImpl implements EjemplarService{
 		Ejemplar ejemplar=ejemplarMapper.newEjemplarDtoToEjemplar(newEjemplar);
 		ejemplarRepository.save(ejemplar);
 		return ejemplarMapper.ejemplarToEjemplarDto(ejemplar);
+
 	}
 
 	@Override
