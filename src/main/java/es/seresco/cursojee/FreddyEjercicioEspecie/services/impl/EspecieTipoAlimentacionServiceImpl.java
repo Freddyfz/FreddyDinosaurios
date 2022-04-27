@@ -50,4 +50,8 @@ public class EspecieTipoAlimentacionServiceImpl implements EspecieTipoAlimentaci
 		return especieTipoAlimentacionRepository.getByIdEspecie(idEspecie);
 	}
 
+	@Override
+	public EspecieTipoAlimentacion getByIdTipoAlimentacion(Long idTipoAlimentacion) {
+		return especieTipoAlimentacionRepository.getByIdEspecie(idTipoAlimentacion);
+	}
 }

@@ -26,5 +26,5 @@ public class EjemplarDto {
 	private String sexo;
 	
 	@NotNull
-	private String idRecinto;
+	private Long idRecinto;
 }

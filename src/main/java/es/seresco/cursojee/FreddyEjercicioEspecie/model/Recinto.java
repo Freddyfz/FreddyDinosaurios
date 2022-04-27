@@ -41,4 +41,7 @@ public class Recinto implements Serializable{
 	@ManyToOne
 	@JoinColumn(name = "ID_TIPO_ALIMENTACION")
 	private TipoAlimentacion tipoAlimentacion;
+	
+	@Column(name = "ANIMALES")
+	private int animales;
 }

@@ -24,4 +24,6 @@ public interface EjemplarService {
 	void deleteEjemplar(Long idEjemplar);
 
 	List<Ejemplar> getByIdRecinto(Long idRecinto);
+
+	Ejemplar createObj(NewEjemplarDto newEjemplar);
 }

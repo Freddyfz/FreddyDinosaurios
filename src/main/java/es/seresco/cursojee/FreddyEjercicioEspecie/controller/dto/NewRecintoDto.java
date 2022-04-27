@@ -21,4 +21,7 @@ public class NewRecintoDto {
 	
 	@NotNull
 	private Long idTipoAlimentacion;
+	
+	@NotNull
+	private int animales;
 }

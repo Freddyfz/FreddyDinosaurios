@@ -11,7 +11,6 @@ import es.seresco.cursojee.FreddyEjercicioEspecie.exceptions.MiValidationExcepti
 import es.seresco.cursojee.FreddyEjercicioEspecie.mapper.RecintoMapper;
 import es.seresco.cursojee.FreddyEjercicioEspecie.model.Recinto;
 import es.seresco.cursojee.FreddyEjercicioEspecie.repository.RecintoRepository;
-import es.seresco.cursojee.FreddyEjercicioEspecie.services.EjemplarService;
 import es.seresco.cursojee.FreddyEjercicioEspecie.services.RecintoService;
 import es.seresco.cursojee.FreddyEjercicioEspecie.services.TipoAlimentacionService;
 import lombok.extern.slf4j.Slf4j;
@@ -26,9 +25,6 @@ public class RecintoServiceImpl implements RecintoService{
 	@Autowired
 	private RecintoMapper recintoMapper;
 
-	@Autowired
-	private EjemplarService ejemplarService;
-	
 	@Autowired
 	private TipoAlimentacionService tipoAlimentacionService;
 
@@ -79,10 +75,12 @@ public class RecintoServiceImpl implements RecintoService{
 	}
 
 	@Override
-	public void deleteRecinto(Long idRecinto) throws MiValidationException {
-		Recinto recinto=recintoRepository.getById(idRecinto);
-		if(ejemplarService.getByIdRecinto(idRecinto).size()==0) {
+	public Recinto deleteRecinto(Long idRecinto) throws MiValidationException {
+		if(recintoRepository.countEjemplares(idRecinto)==0) {
+			Recinto recinto=recintoRepository.getById(idRecinto);
 			recintoRepository.delete(recinto);
+			return recinto;
 		}
+		return null;
 	}
 }

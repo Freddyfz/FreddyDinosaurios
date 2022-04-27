@@ -20,4 +20,6 @@ public interface EspecieTipoAlimentacionService {
 	void deleteEspecieTipoAlimentacion(EspecieTipoAlimentacionPK especieTipoAlimentacionPK);
 
 	EspecieTipoAlimentacion getByIdEspecie(Long idEspecie);
+
+	EspecieTipoAlimentacion getByIdTipoAlimentacion(Long idTipoAlimentacion);
 }

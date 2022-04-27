@@ -2,6 +2,7 @@ package es.seresco.cursojee.FreddyEjercicioEspecie.service.impl;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 
 import java.util.List;
 
@@ -52,12 +53,19 @@ public class RecintoServiceTestCase extends AbstractServiceTestCase{
 	public void testFindAll() throws MiValidationException {
 		List<RecintoDto> resultado= recintoService.findRecintos();
 		assertNotNull(resultado);
-		assertEquals("Se esperan 3 recintos", 6, resultado.size());
+		assertEquals("Se esperan 7 recintos", 7, resultado.size());
+	}
+	
+	@Test
+	@DisplayName("Eliminar recinto lleno")
+	public void testDeleteLleno()throws MiValidationException{
+		assertNull(recintoService.deleteRecinto(1L));
 	}
 	
 	@Test
 	@DisplayName("Eliminar recinto")
-	public void testDelete()throws MiValidationException{
-		recintoService.deleteRecinto(1L);
+	public void testDeleteVacio()throws MiValidationException{
+		assertNotNull(recintoService.deleteRecinto(7L));
 	}
+	
 }

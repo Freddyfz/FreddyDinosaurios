@@ -12,7 +12,9 @@ import es.seresco.cursojee.FreddyEjercicioEspecie.mapper.EjemplarMapper;
 import es.seresco.cursojee.FreddyEjercicioEspecie.model.Ejemplar;
 import es.seresco.cursojee.FreddyEjercicioEspecie.repository.EjemplarRepository;
 import es.seresco.cursojee.FreddyEjercicioEspecie.services.EjemplarService;
+import es.seresco.cursojee.FreddyEjercicioEspecie.services.EspecieService;
 import es.seresco.cursojee.FreddyEjercicioEspecie.services.EspecieTipoAlimentacionService;
+import es.seresco.cursojee.FreddyEjercicioEspecie.services.RecintoService;
 import lombok.extern.slf4j.Slf4j;
 
 @Service(EjemplarService.BEAN_NAME)
@@ -28,6 +30,12 @@ public class EjemplarServiceImpl implements EjemplarService{
 	@Autowired
 	private EspecieTipoAlimentacionService especieTipoAlimentacionService;
 
+	@Autowired
+	private EspecieService especieService;
+
+	@Autowired
+	private RecintoService recintoService;
+
 	@Override
 	public EjemplarDto getEjemplar(Long idEjemplar) {
 		log.info("Usando bean {}, para obtener ejemplar {}", BEAN_NAME, idEjemplar);
@@ -38,16 +46,45 @@ public class EjemplarServiceImpl implements EjemplarService{
 	@Override
 	public EjemplarDto create(NewEjemplarDto newEjemplar) {
 		log.info("Usando bean {}, para crear ejemplar", BEAN_NAME);
-		Ejemplar ejemplar=ejemplarMapper.newEjemplarDtoToEjemplar(newEjemplar);
-		if(ejemplar.getRecinto().getTipoAlimentacion().getDescripcion().equals(especieTipoAlimentacionService.getByIdEspecie(ejemplar.getEspecie().getId()).getTipoAlimentacion().getDescripcion())) {
-			if(ejemplarRepository.getByRecintoId(ejemplar.getRecinto().getId()).size()<4 && ejemplarRepository.getByRecintoId(ejemplar.getRecinto().getId()).size()>=0) {
-				ejemplarRepository.save(ejemplar);
-				return ejemplarMapper.ejemplarToEjemplarDto(ejemplar);
+		//Comprobamos que newEjemplar tenga los atributos de las ids
+		if(newEjemplar.getIdRecinto()!=null&&newEjemplar.getIdEspecie()!=null) {
+			Ejemplar ejemplar=ejemplarMapper.newEjemplarDtoToEjemplar(newEjemplar);
+			ejemplar.setRecinto(recintoService.getRecintoObj(newEjemplar.getIdRecinto()));
+			ejemplar.setEspecie(especieService.getEspecieObj(newEjemplar.getIdEspecie()));
+			//Comprobamos que coinciden el tipo alimentacion de la especie y del recinto
+			if(especieTipoAlimentacionService.getByIdEspecie(ejemplar.getEspecie().getId())!=null&&especieTipoAlimentacionService.getByIdTipoAlimentacion(ejemplarRepository.getTipoAlimentacin(ejemplar.getRecinto().getId()).getId())!=null) {
+				//Comprobamos que hay sitio disponible en el recinto
+				if(ejemplarRepository.getByRecintoId(ejemplar.getRecinto().getId()).size()<4 && ejemplarRepository.getByRecintoId(ejemplar.getRecinto().getId()).size()>=0) {
+					ejemplar.getRecinto().setAnimales(ejemplar.getRecinto().getAnimales()+1);
+					ejemplarRepository.save(ejemplar);
+					return ejemplarMapper.ejemplarToEjemplarDto(ejemplar);
+				}
 			}
 		}
 		return null;
 	}
 
+	@Override
+	public Ejemplar createObj(NewEjemplarDto newEjemplar) {
+		log.info("Usando bean {}, para crear ejemplar", BEAN_NAME);
+		//Comprobamos que newEjemplar tenga los atributos de las ids
+		if(newEjemplar.getIdRecinto()!=null&&newEjemplar.getIdEspecie()!=null) {
+			Ejemplar ejemplar=ejemplarMapper.newEjemplarDtoToEjemplar(newEjemplar);
+			ejemplar.setRecinto(recintoService.getRecintoObj(newEjemplar.getIdRecinto()));
+			ejemplar.setEspecie(especieService.getEspecieObj(newEjemplar.getIdEspecie()));
+			//Comprobamos que coinciden el tipo alimentacion de la especie y del recinto
+			if(especieTipoAlimentacionService.getByIdEspecie(ejemplar.getEspecie().getId())!=null&&especieTipoAlimentacionService.getByIdTipoAlimentacion(ejemplarRepository.getTipoAlimentacin(ejemplar.getRecinto().getId()).getId())!=null) {
+				//Comprobamos que hay sitio disponible en el recinto
+				if(ejemplarRepository.getByRecintoId(ejemplar.getRecinto().getId()).size()<4 && ejemplarRepository.getByRecintoId(ejemplar.getRecinto().getId()).size()>=0) {
+					
+					ejemplarRepository.save(ejemplar);
+					return ejemplar;
+				}
+			}
+		}
+		return null;
+	}
+	
 	@Override
 	public List<EjemplarDto> findEjemplares() throws MiValidationException {
 		log.info("Usando bean {}, para buscar ejemplares", BEAN_NAME);
@@ -59,7 +96,7 @@ public class EjemplarServiceImpl implements EjemplarService{
 		log.info("Usando bean {}, para actualizar ejemplar {}", BEAN_NAME,idEjemplar);
 		Ejemplar ejemplar=ejemplarRepository.getById(idEjemplar);
 		ejemplar=ejemplarMapper.newEjemplarDtoToEjemplar(updatedEjemplar);
-		if(ejemplar.getRecinto().getTipoAlimentacion().getDescripcion().equals(especieTipoAlimentacionService.getByIdEspecie(ejemplar.getEspecie().getId()).getTipoAlimentacion().getDescripcion())) {
+		if(especieTipoAlimentacionService.getByIdEspecie(ejemplar.getEspecie().getId())!=null&&especieTipoAlimentacionService.getByIdTipoAlimentacion(ejemplarRepository.getTipoAlimentacin(ejemplar.getRecinto().getId()).getId())!=null) {
 			if(ejemplarRepository.getByRecintoId(ejemplar.getRecinto().getId()).size()<4 && ejemplarRepository.getByRecintoId(ejemplar.getRecinto().getId()).size()>=0) {
 				ejemplarRepository.save(ejemplar);
 				return ejemplarMapper.ejemplarToEjemplarDto(ejemplar);
@@ -71,7 +108,7 @@ public class EjemplarServiceImpl implements EjemplarService{
 	@Override
 	public EjemplarDto updateEjemplar(EjemplarDto updatedEjemplar) throws MiValidationException {
 		Ejemplar ejemplar=ejemplarMapper.ejemplarDtoToEjemplar(updatedEjemplar);
-		if(ejemplar.getRecinto().getTipoAlimentacion().getDescripcion().equals(especieTipoAlimentacionService.getByIdEspecie(ejemplar.getEspecie().getId()).getTipoAlimentacion().getDescripcion())) {
+		if(especieTipoAlimentacionService.getByIdEspecie(ejemplar.getEspecie().getId())!=null&&especieTipoAlimentacionService.getByIdTipoAlimentacion(ejemplarRepository.getTipoAlimentacin(ejemplar.getRecinto().getId()).getId())!=null) {
 			if(ejemplarRepository.getByRecintoId(ejemplar.getRecinto().getId()).size()<4 && ejemplarRepository.getByRecintoId(ejemplar.getRecinto().getId()).size()>=0) {
 				ejemplarRepository.save(ejemplar);
 				return ejemplarMapper.ejemplarToEjemplarDto(ejemplar);
@@ -86,7 +123,7 @@ public class EjemplarServiceImpl implements EjemplarService{
 		ejemplarRepository.delete(ejemplar);
 
 	}
-	
+
 	@Override
 	public List<Ejemplar> getByIdRecinto(Long idRecinto){
 		if(ejemplarRepository.getByRecintoId(idRecinto)==null) {

@@ -10,4 +10,6 @@ import es.seresco.cursojee.FreddyEjercicioEspecie.model.EspecieTipoAlimentacionP
 public interface EspecieTipoAlimentacionRepository extends JpaRepository<EspecieTipoAlimentacion, EspecieTipoAlimentacionPK>{
 
 	public EspecieTipoAlimentacion getByIdEspecie(Long idEspecie);
+	
+	public EspecieTipoAlimentacion getByIdTipoAlimentacion(Long idTipoALimentacion);
 }
