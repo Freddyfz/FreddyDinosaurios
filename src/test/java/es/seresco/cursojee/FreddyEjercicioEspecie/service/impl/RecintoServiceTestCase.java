@@ -1,6 +1,9 @@
 package es.seresco.cursojee.FreddyEjercicioEspecie.service.impl;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+
+import java.util.List;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -21,14 +24,20 @@ import es.seresco.cursojee.FreddyEjercicioEspecie.services.RecintoService;
 @RunWith(SpringRunner.class)
 @DirtiesContext(classMode = ClassMode.AFTER_CLASS)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK, classes = Application.class)
-@TestPropertySource(locations = "classpath:application-test.properties")
-public class RecintoServiceTestCase {
+@TestPropertySource(locations = "classpath:/dbunit/application-test.properties")
+public class RecintoServiceTestCase extends AbstractServiceTestCase{
 
 	@Autowired
 	private RecintoService recintoService;
 	
 	@Test
-	@DisplayName("Crear Recinto")
+	@DisplayName("Obtener recinto")
+	public void testGet()throws MiValidationException{
+		assertNotNull(recintoService.getRecintoObj(1L));
+	}
+	
+	@Test
+	@DisplayName("Crear recinto")
 	public void testCreate()throws MiValidationException{
 		NewRecintoDto newRecinto=new NewRecintoDto();
 		newRecinto.setCodigo("R-7");
@@ -36,5 +45,13 @@ public class RecintoServiceTestCase {
 		newRecinto.setIdTipoAlimentacion(1L);
 		RecintoDto recintoDto= recintoService.create(newRecinto);
 		assertNotNull(recintoDto);
+	}
+	
+	@Test
+	@DisplayName("Obtener todas los recintos de dinosaurios")
+	public void testFindAll() throws MiValidationException {
+		List<RecintoDto> resultado= recintoService.findRecintos();
+		assertNotNull(resultado);
+		assertEquals("Se esperan 3 recintos", 6, resultado.size());
 	}
 }

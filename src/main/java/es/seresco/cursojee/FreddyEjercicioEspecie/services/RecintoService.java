@@ -5,6 +5,7 @@ import java.util.List;
 import es.seresco.cursojee.FreddyEjercicioEspecie.controller.dto.NewRecintoDto;
 import es.seresco.cursojee.FreddyEjercicioEspecie.controller.dto.RecintoDto;
 import es.seresco.cursojee.FreddyEjercicioEspecie.exceptions.MiValidationException;
+import es.seresco.cursojee.FreddyEjercicioEspecie.model.Recinto;
 
 public interface RecintoService {
 
@@ -21,4 +22,6 @@ public interface RecintoService {
 	RecintoDto updateRecinto(RecintoDto updatedRecinto) throws MiValidationException;
 
 	void deleteRecinto(Long idRecinto) throws MiValidationException;
+
+	Recinto getRecintoObj(Long idRecinto);
 }

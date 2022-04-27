@@ -2,7 +2,6 @@ package es.seresco.cursojee.FreddyEjercicioEspecie.mapper;
 
 import java.util.List;
 
-import org.mapstruct.InheritConfiguration;
 import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -23,7 +22,8 @@ public interface RecintoMapper {
 	public NewRecintoDto recintoTonewRecintoDto(Recinto recinto);
 	
 	@Mapping(source="id",target="id")
-	@InheritConfiguration(name="newRecintoDtoToRecinto")
+	@Mapping(source="codigo",target="codigo")
+	@Mapping(source="descripcion",target="descripcion")
 	public Recinto recintoDtoToRecinto(RecintoDto recintoDto);
 	
 	@InheritInverseConfiguration

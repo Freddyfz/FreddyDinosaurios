@@ -38,13 +38,18 @@ public class RecintoServiceImpl implements RecintoService{
 		return recintoMapper.recintoToRecintoDto(recintoRepository.getById(idRecinto));
 	}
 
+	@Override
+	public Recinto getRecintoObj(Long idRecinto) {
+		log.info("Usando bean {}, para obtener recinto {}", BEAN_NAME, idRecinto);
+		return recintoRepository.getById(idRecinto);
+	}
 
 	@Override
 	public RecintoDto create(NewRecintoDto newRecinto) {
 		log.info("Usando bean {}, para crear recinto", BEAN_NAME);
 		if(newRecinto.getIdTipoAlimentacion()!=null) {
 			Recinto recinto=recintoMapper.newRecintoDtoToRecinto(newRecinto);
-			recinto.setTipoAlimentacion(tipoAlimentacionService.getTipoAlimentacionObj(recinto.getTipoAlimentacion().getId()));
+			recinto.setTipoAlimentacion(tipoAlimentacionService.getTipoAlimentacionObj(newRecinto.getIdTipoAlimentacion()));
 			recintoRepository.save(recinto);
 			return recintoMapper.recintoToRecintoDto(recinto);
 		}

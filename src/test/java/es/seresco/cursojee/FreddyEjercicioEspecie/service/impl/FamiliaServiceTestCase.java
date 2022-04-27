@@ -23,8 +23,8 @@ import es.seresco.cursojee.FreddyEjercicioEspecie.services.FamiliaService;
 @RunWith(SpringRunner.class)
 @DirtiesContext(classMode = ClassMode.AFTER_CLASS)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK, classes = Application.class)
-@TestPropertySource(locations = "classpath:application-test.properties")
-public class FamiliaServiceTestCase {
+@TestPropertySource(locations = "classpath:/dbunit/application-test.properties")
+public class FamiliaServiceTestCase extends AbstractServiceTestCase{
 
 	@Autowired
 	private FamiliaService familiaService;
@@ -34,6 +34,6 @@ public class FamiliaServiceTestCase {
 	public void testFindAll() throws MiValidationException {
 		List<FamiliaDto> resultado= familiaService.findFamilias();
 		assertNotNull(resultado);
-		assertEquals("Se esperan 3 familias", 1, resultado.size());
+		assertEquals("Se esperan 3 familias", 3, resultado.size());
 	}
 }

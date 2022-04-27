@@ -23,7 +23,7 @@ import es.seresco.cursojee.FreddyEjercicioEspecie.services.EspecieService;
 @RunWith(SpringRunner.class)
 @DirtiesContext(classMode = ClassMode.AFTER_CLASS)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK, classes = Application.class)
-@TestPropertySource(locations = "classpath:application-test.properties")
+@TestPropertySource(locations = "classpath:/dbunit/application-test.properties")
 public class EspecieServiceTestCase extends AbstractServiceTestCase{
 
 	@Autowired
