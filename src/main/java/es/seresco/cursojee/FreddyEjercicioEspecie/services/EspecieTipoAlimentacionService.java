@@ -18,4 +18,6 @@ public interface EspecieTipoAlimentacionService {
 	List<EspecieTipoAlimentacionDto> findEspecieTipoAlimentaciones () throws MiValidationException;
 
 	void deleteEspecieTipoAlimentacion(EspecieTipoAlimentacionPK especieTipoAlimentacionPK);
+
+	EspecieTipoAlimentacion getByIdEspecie(Long idEspecie);
 }

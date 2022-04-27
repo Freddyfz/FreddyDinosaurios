@@ -11,32 +11,44 @@ import es.seresco.cursojee.FreddyEjercicioEspecie.exceptions.MiValidationExcepti
 import es.seresco.cursojee.FreddyEjercicioEspecie.mapper.RecintoMapper;
 import es.seresco.cursojee.FreddyEjercicioEspecie.model.Recinto;
 import es.seresco.cursojee.FreddyEjercicioEspecie.repository.RecintoRepository;
+import es.seresco.cursojee.FreddyEjercicioEspecie.services.EjemplarService;
 import es.seresco.cursojee.FreddyEjercicioEspecie.services.RecintoService;
+import es.seresco.cursojee.FreddyEjercicioEspecie.services.TipoAlimentacionService;
 import lombok.extern.slf4j.Slf4j;
 
 @Service(RecintoService.BEAN_NAME)
 @Slf4j
 public class RecintoServiceImpl implements RecintoService{
-	
+
 	@Autowired
 	private RecintoRepository recintoRepository;
-	
+
 	@Autowired
 	private RecintoMapper recintoMapper;
+
+	@Autowired
+	private EjemplarService ejemplarService;
 	
+	@Autowired
+	private TipoAlimentacionService tipoAlimentacionService;
+
 	@Override
 	public RecintoDto getRecinto(Long idRecinto) {
 		log.info("Usando bean {}, para obtener recinto {}", BEAN_NAME, idRecinto);
 		return recintoMapper.recintoToRecintoDto(recintoRepository.getById(idRecinto));
 	}
-	
+
 
 	@Override
 	public RecintoDto create(NewRecintoDto newRecinto) {
 		log.info("Usando bean {}, para crear recinto", BEAN_NAME);
-		Recinto recinto=recintoMapper.newRecintoDtoToRecinto(newRecinto);
-		recintoRepository.save(recinto);
-		return recintoMapper.recintoToRecintoDto(recinto);
+		if(newRecinto.getIdTipoAlimentacion()!=null) {
+			Recinto recinto=recintoMapper.newRecintoDtoToRecinto(newRecinto);
+			recinto.setTipoAlimentacion(tipoAlimentacionService.getTipoAlimentacionObj(recinto.getTipoAlimentacion().getId()));
+			recintoRepository.save(recinto);
+			return recintoMapper.recintoToRecintoDto(recinto);
+		}
+		return null;
 	}
 
 	@Override
@@ -62,9 +74,10 @@ public class RecintoServiceImpl implements RecintoService{
 	}
 
 	@Override
-	public void deleteRecinto(Long idRecinto) {
+	public void deleteRecinto(Long idRecinto) throws MiValidationException {
 		Recinto recinto=recintoRepository.getById(idRecinto);
-		recintoRepository.delete(recinto);
-		
+		if(ejemplarService.getByIdRecinto(idRecinto).size()==0) {
+			recintoRepository.delete(recinto);
+		}
 	}
 }

@@ -13,6 +13,7 @@ import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import es.seresco.cursojee.FreddyEjercicioEspecie.controller.dto.NewRecintoDto;
+import es.seresco.cursojee.FreddyEjercicioEspecie.controller.dto.RecintoDto;
 import es.seresco.cursojee.FreddyEjercicioEspecie.core.Application;
 import es.seresco.cursojee.FreddyEjercicioEspecie.exceptions.MiValidationException;
 import es.seresco.cursojee.FreddyEjercicioEspecie.services.RecintoService;
@@ -30,6 +31,10 @@ public class RecintoServiceTestCase {
 	@DisplayName("Crear Recinto")
 	public void testCreate()throws MiValidationException{
 		NewRecintoDto newRecinto=new NewRecintoDto();
-		assertNotNull(recintoService.create(newRecinto));
+		newRecinto.setCodigo("R-7");
+		newRecinto.setDescripcion("Recinto 7");
+		newRecinto.setIdTipoAlimentacion(1L);
+		RecintoDto recintoDto= recintoService.create(newRecinto);
+		assertNotNull(recintoDto);
 	}
 }

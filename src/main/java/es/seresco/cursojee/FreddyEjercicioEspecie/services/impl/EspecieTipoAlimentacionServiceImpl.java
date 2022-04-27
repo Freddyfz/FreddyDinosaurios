@@ -45,6 +45,9 @@ public class EspecieTipoAlimentacionServiceImpl implements EspecieTipoAlimentaci
 		especieTipoAlimentacionRepository.delete(especieTipoAlimentacionRepository.getById(especieTipoAlimentacionPK));
 	}
 	
-	
+	@Override
+	public EspecieTipoAlimentacion getByIdEspecie(Long idEspecie) {
+		return especieTipoAlimentacionRepository.getByIdEspecie(idEspecie);
+	}
 
 }

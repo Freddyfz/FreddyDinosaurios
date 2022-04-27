@@ -20,5 +20,5 @@ public interface RecintoService {
 
 	RecintoDto updateRecinto(RecintoDto updatedRecinto) throws MiValidationException;
 
-	void deleteRecinto(Long idRecinto);
+	void deleteRecinto(Long idRecinto) throws MiValidationException;
 }

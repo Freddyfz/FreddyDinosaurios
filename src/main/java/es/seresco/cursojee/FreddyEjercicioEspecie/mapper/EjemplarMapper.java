@@ -14,10 +14,10 @@ import es.seresco.cursojee.FreddyEjercicioEspecie.model.Ejemplar;
 @Mapper(componentModel = "spring")
 public interface EjemplarMapper {
 
-	@Mapping(source="idEspecie",target="idEspecie")
+	@Mapping(source="idEspecie",target="especie.id")
 	@Mapping(source="nombre",target="nombre")
 	@Mapping(source="sexo",target="sexo")
-	@Mapping(source="idRecinto",target="idRecinto")
+	@Mapping(source="idRecinto",target="recinto.id")
 	public Ejemplar newEjemplarDtoToEjemplar(NewEjemplarDto newEjemplarDto);
 	
 	@InheritInverseConfiguration

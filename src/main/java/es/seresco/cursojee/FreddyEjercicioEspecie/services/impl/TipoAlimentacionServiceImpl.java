@@ -30,6 +30,11 @@ public class TipoAlimentacionServiceImpl implements TipoAlimentacionService{
 	}
 
 	@Override
+	public TipoAlimentacion getTipoAlimentacionObj(Long idTipoAlimentacion) {
+		log.info("Usando bean {}, para obtener tipoAlimentacion {}", BEAN_NAME, idTipoAlimentacion);
+		return tipoAlimentacionRepository.getById(idTipoAlimentacion);
+	}
+	@Override
 	public TipoAlimentacionDto create(NewTipoAlimentacionDto newTipoAlimentacion) {
 		log.info("Usando bean {}, para crear tipoAlimentacion", BEAN_NAME);
 		TipoAlimentacion tipoAlimentacion=tipoAlimentacionMapper.newTipoAlimentacionDtoToTipoAlimentacion(newTipoAlimentacion);

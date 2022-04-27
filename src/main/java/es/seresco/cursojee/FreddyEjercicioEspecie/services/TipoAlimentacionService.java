@@ -5,6 +5,7 @@ import java.util.List;
 import es.seresco.cursojee.FreddyEjercicioEspecie.controller.dto.NewTipoAlimentacionDto;
 import es.seresco.cursojee.FreddyEjercicioEspecie.controller.dto.TipoAlimentacionDto;
 import es.seresco.cursojee.FreddyEjercicioEspecie.exceptions.MiValidationException;
+import es.seresco.cursojee.FreddyEjercicioEspecie.model.TipoAlimentacion;
 
 public interface TipoAlimentacionService {
 	
@@ -21,5 +22,7 @@ public interface TipoAlimentacionService {
 	TipoAlimentacionDto updateTipoAlimentacion(TipoAlimentacionDto updatedTipoAlimentacion) throws MiValidationException;
 
 	void deleteTipoAlimentacion(Long idTipoAlimentacion);
+
+	TipoAlimentacion getTipoAlimentacionObj(Long idTipoAlimentacion);
 
 }

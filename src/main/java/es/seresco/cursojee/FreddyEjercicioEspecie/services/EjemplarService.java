@@ -5,6 +5,7 @@ import java.util.List;
 import es.seresco.cursojee.FreddyEjercicioEspecie.controller.dto.EjemplarDto;
 import es.seresco.cursojee.FreddyEjercicioEspecie.controller.dto.NewEjemplarDto;
 import es.seresco.cursojee.FreddyEjercicioEspecie.exceptions.MiValidationException;
+import es.seresco.cursojee.FreddyEjercicioEspecie.model.Ejemplar;
 
 public interface EjemplarService {
 
@@ -21,4 +22,6 @@ public interface EjemplarService {
 	EjemplarDto updateEjemplar(EjemplarDto updatedEjemplar) throws MiValidationException;
 
 	void deleteEjemplar(Long idEjemplar);
+
+	List<Ejemplar> getByIdRecinto(Long idRecinto);
 }

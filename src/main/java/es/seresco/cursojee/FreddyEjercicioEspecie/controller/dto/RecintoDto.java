@@ -17,7 +17,7 @@ public class RecintoDto {
 	private Long id;
 	
 	@NotNull
-	private Long codigo;
+	private String codigo;
 	
 	@NotNull
 	private String descripcion;

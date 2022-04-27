@@ -14,8 +14,6 @@ import lombok.Setter;
 public class EspecieTipoAlimentacionDto {
 
 	@NotNull
-	private Long id;
-	@NotNull
 	private Long idEspecie;
 	@NotNull
 	private Long idTipoAlimentacion;

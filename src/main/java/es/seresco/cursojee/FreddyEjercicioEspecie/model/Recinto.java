@@ -39,6 +39,6 @@ public class Recinto implements Serializable{
 	
 	@ToString.Exclude
 	@ManyToOne
-	@JoinColumn(name = "ID_TIPO_ALIMENTACION", referencedColumnName = "id")
+	@JoinColumn(name = "ID_TIPO_ALIMENTACION")
 	private TipoAlimentacion tipoAlimentacion;
 }

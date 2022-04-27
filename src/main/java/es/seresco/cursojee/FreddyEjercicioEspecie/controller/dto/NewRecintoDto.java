@@ -14,7 +14,7 @@ import lombok.Setter;
 public class NewRecintoDto {
 
 	@NotNull
-	private Long codigo;
+	private String codigo;
 	
 	@NotNull
 	private String descripcion;

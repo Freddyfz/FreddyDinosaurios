@@ -12,32 +12,40 @@ import es.seresco.cursojee.FreddyEjercicioEspecie.mapper.EjemplarMapper;
 import es.seresco.cursojee.FreddyEjercicioEspecie.model.Ejemplar;
 import es.seresco.cursojee.FreddyEjercicioEspecie.repository.EjemplarRepository;
 import es.seresco.cursojee.FreddyEjercicioEspecie.services.EjemplarService;
+import es.seresco.cursojee.FreddyEjercicioEspecie.services.EspecieTipoAlimentacionService;
 import lombok.extern.slf4j.Slf4j;
 
 @Service(EjemplarService.BEAN_NAME)
 @Slf4j
 public class EjemplarServiceImpl implements EjemplarService{
-	
+
 	@Autowired
 	private EjemplarRepository ejemplarRepository;
-	
+
 	@Autowired
 	private EjemplarMapper ejemplarMapper;
-	
+
+	@Autowired
+	private EspecieTipoAlimentacionService especieTipoAlimentacionService;
+
 	@Override
 	public EjemplarDto getEjemplar(Long idEjemplar) {
 		log.info("Usando bean {}, para obtener ejemplar {}", BEAN_NAME, idEjemplar);
 		return ejemplarMapper.ejemplarToEjemplarDto(ejemplarRepository.getById(idEjemplar));
 	}
-	
+
 
 	@Override
 	public EjemplarDto create(NewEjemplarDto newEjemplar) {
 		log.info("Usando bean {}, para crear ejemplar", BEAN_NAME);
 		Ejemplar ejemplar=ejemplarMapper.newEjemplarDtoToEjemplar(newEjemplar);
-		ejemplarRepository.save(ejemplar);
-		return ejemplarMapper.ejemplarToEjemplarDto(ejemplar);
-
+		if(ejemplar.getRecinto().getTipoAlimentacion().getDescripcion().equals(especieTipoAlimentacionService.getByIdEspecie(ejemplar.getEspecie().getId()).getTipoAlimentacion().getDescripcion())) {
+			if(ejemplarRepository.getByRecintoId(ejemplar.getRecinto().getId()).size()<4 && ejemplarRepository.getByRecintoId(ejemplar.getRecinto().getId()).size()>=0) {
+				ejemplarRepository.save(ejemplar);
+				return ejemplarMapper.ejemplarToEjemplarDto(ejemplar);
+			}
+		}
+		return null;
 	}
 
 	@Override
@@ -51,21 +59,39 @@ public class EjemplarServiceImpl implements EjemplarService{
 		log.info("Usando bean {}, para actualizar ejemplar {}", BEAN_NAME,idEjemplar);
 		Ejemplar ejemplar=ejemplarRepository.getById(idEjemplar);
 		ejemplar=ejemplarMapper.newEjemplarDtoToEjemplar(updatedEjemplar);
-		ejemplarRepository.save(ejemplar);
-		return ejemplarMapper.ejemplarToEjemplarDto(ejemplar);
+		if(ejemplar.getRecinto().getTipoAlimentacion().getDescripcion().equals(especieTipoAlimentacionService.getByIdEspecie(ejemplar.getEspecie().getId()).getTipoAlimentacion().getDescripcion())) {
+			if(ejemplarRepository.getByRecintoId(ejemplar.getRecinto().getId()).size()<4 && ejemplarRepository.getByRecintoId(ejemplar.getRecinto().getId()).size()>=0) {
+				ejemplarRepository.save(ejemplar);
+				return ejemplarMapper.ejemplarToEjemplarDto(ejemplar);
+			}
+		}
+		return null;
 	}
 
 	@Override
 	public EjemplarDto updateEjemplar(EjemplarDto updatedEjemplar) throws MiValidationException {
 		Ejemplar ejemplar=ejemplarMapper.ejemplarDtoToEjemplar(updatedEjemplar);
-		ejemplarRepository.save(ejemplar);
-		return ejemplarMapper.ejemplarToEjemplarDto(ejemplar);
+		if(ejemplar.getRecinto().getTipoAlimentacion().getDescripcion().equals(especieTipoAlimentacionService.getByIdEspecie(ejemplar.getEspecie().getId()).getTipoAlimentacion().getDescripcion())) {
+			if(ejemplarRepository.getByRecintoId(ejemplar.getRecinto().getId()).size()<4 && ejemplarRepository.getByRecintoId(ejemplar.getRecinto().getId()).size()>=0) {
+				ejemplarRepository.save(ejemplar);
+				return ejemplarMapper.ejemplarToEjemplarDto(ejemplar);
+			}
+		}
+		return null;
 	}
 
 	@Override
 	public void deleteEjemplar(Long idEjemplar) {
 		Ejemplar ejemplar=ejemplarRepository.getById(idEjemplar);
 		ejemplarRepository.delete(ejemplar);
-		
+
+	}
+	
+	@Override
+	public List<Ejemplar> getByIdRecinto(Long idRecinto){
+		if(ejemplarRepository.getByRecintoId(idRecinto)==null) {
+			return null;
+		}
+		return ejemplarRepository.getByRecintoId(idRecinto);
 	}
 }
