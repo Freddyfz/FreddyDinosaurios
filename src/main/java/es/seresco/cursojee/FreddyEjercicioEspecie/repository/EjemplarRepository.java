@@ -26,7 +26,7 @@ public interface EjemplarRepository extends JpaRepository<Ejemplar, Long>{
 			+ "(SELECT e.id FROM et.especie e WHERE e.id=?1))")
 	public EspecieTipoAlimentacion comprobarTipoAlimentacion(Long idEspecie,Long idRecinto);
 
-	@Query("SELECT ejemplar.especie.tipoAlimentacion FROM Ejemplar ejemplar "
+	@Query("SELECT ejemplar.especieTipoAlimentacion.tipoAlimentacion FROM Ejemplar ejemplar "
 			+ "WHERE ejemplar.especie.id = ?1")
 	public Long comprobarTipoAlimentacionEspecie(Long idEspecie);
 
