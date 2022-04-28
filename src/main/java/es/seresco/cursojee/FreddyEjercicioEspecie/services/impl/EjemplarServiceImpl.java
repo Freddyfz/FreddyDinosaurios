@@ -37,7 +37,12 @@ public class EjemplarServiceImpl implements EjemplarService{
 		log.info("Usando bean {}, para obtener ejemplar {}", BEAN_NAME, idEjemplar);
 		return ejemplarMapper.ejemplarToEjemplarDto(ejemplarRepository.getById(idEjemplar));
 	}
-
+	
+	@Override
+	public Ejemplar getEjemplarObj(Long idEjemplar) {
+		log.info("Usando bean {}, para obtener ejemplar {}", BEAN_NAME, idEjemplar);
+		return ejemplarRepository.getById(idEjemplar);
+	}
 
 	@Override
 	public EjemplarDto create(NewEjemplarDto newEjemplar) {
@@ -102,6 +107,32 @@ public class EjemplarServiceImpl implements EjemplarService{
 			if(ejemplarRepository.comprobarTipoAlimentacionEspecie(updatedEjemplar.getIdEspecie())==ejemplarRepository.comprobarTipoAlimentacionRecinto(updatedEjemplar.getIdRecinto())) {
 				ejemplarRepository.save(ejemplar);
 				return ejemplarMapper.ejemplarToEjemplarDto(ejemplar);
+			}
+		}
+		return null;
+	}
+	
+	@Override
+	public Ejemplar updateEjemplarObj(Long idEjemplar, NewEjemplarDto updatedEjemplar) throws MiValidationException {
+		log.info("Usando bean {}, para actualizar ejemplar {}", BEAN_NAME,idEjemplar);
+		Ejemplar ejemplar=ejemplarRepository.getById(idEjemplar);
+		ejemplar=ejemplarMapper.newEjemplarDtoToEjemplar(updatedEjemplar);
+		if(ejemplarRepository.getByRecintoId(ejemplar.getRecinto().getId()).size()<4 && ejemplarRepository.getByRecintoId(ejemplar.getRecinto().getId()).size()>=0) {
+			if(ejemplarRepository.comprobarTipoAlimentacionEspecie(updatedEjemplar.getIdEspecie())==ejemplarRepository.comprobarTipoAlimentacionRecinto(updatedEjemplar.getIdRecinto())) {
+				ejemplarRepository.save(ejemplar);
+				return ejemplar;
+			}
+		}
+		return null;
+	}
+
+	@Override
+	public Ejemplar updateEjemplarObj(EjemplarDto updatedEjemplar) throws MiValidationException {
+		Ejemplar ejemplar=ejemplarMapper.ejemplarDtoToEjemplar(updatedEjemplar);
+		if(ejemplarRepository.getByRecintoId(ejemplar.getRecinto().getId()).size()<4 && ejemplarRepository.getByRecintoId(ejemplar.getRecinto().getId()).size()>=0) {
+			if(ejemplarRepository.comprobarTipoAlimentacionEspecie(updatedEjemplar.getIdEspecie())==ejemplarRepository.comprobarTipoAlimentacionRecinto(updatedEjemplar.getIdRecinto())) {
+				ejemplarRepository.save(ejemplar);
+				return ejemplar;
 			}
 		}
 		return null;

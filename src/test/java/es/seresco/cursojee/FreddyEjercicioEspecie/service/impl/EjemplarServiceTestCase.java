@@ -1,7 +1,10 @@
 package es.seresco.cursojee.FreddyEjercicioEspecie.service.impl;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+
+import java.util.List;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -13,9 +16,11 @@ import org.springframework.test.annotation.DirtiesContext.ClassMode;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import es.seresco.cursojee.FreddyEjercicioEspecie.controller.dto.EjemplarDto;
 import es.seresco.cursojee.FreddyEjercicioEspecie.controller.dto.NewEjemplarDto;
 import es.seresco.cursojee.FreddyEjercicioEspecie.core.Application;
 import es.seresco.cursojee.FreddyEjercicioEspecie.exceptions.MiValidationException;
+import es.seresco.cursojee.FreddyEjercicioEspecie.model.Ejemplar;
 import es.seresco.cursojee.FreddyEjercicioEspecie.services.EjemplarService;
 
 @RunWith(SpringRunner.class)
@@ -58,5 +63,45 @@ public class EjemplarServiceTestCase extends AbstractServiceTestCase{
 		newEjemplarDto.setIdEspecie(2L);
 		newEjemplarDto.setSexo("MACHO");
 		assertNotNull(ejemplarService.createObj(newEjemplarDto));
+	}
+	
+	@Test
+	@DisplayName("Obtener todas las ejemplares")
+	public void testFindAll() throws MiValidationException {
+		List<EjemplarDto> resultado= ejemplarService.findEjemplares();
+		assertNotNull(resultado);
+		assertEquals("Se esperan 8 ejemplars", 20, resultado.size());
+	}
+	
+	@Test
+	@DisplayName("Obtener ejemplar por id")
+	public void testGet() throws MiValidationException {
+		Ejemplar ejemplar=ejemplarService.getEjemplarObj(1L);
+		assertNotNull(ejemplar);
+	}
+	
+	@Test
+	@DisplayName("Update id, newEjemplarDto")
+	public void testUpdate() throws MiValidationException {
+		NewEjemplarDto newEjemplarDto=new NewEjemplarDto();
+		newEjemplarDto.setNombre("Aerodactilos");
+		assertNotNull(ejemplarService.updateEjemplarObj(1L,newEjemplarDto));
+	}
+	
+	@Test
+	@DisplayName("Update EjemplarDto")
+	public void testUpdateDto() throws MiValidationException {
+		EjemplarDto ejemplarDto=new EjemplarDto();
+		ejemplarDto.setIdEspecie(1L);
+		ejemplarDto.setIdRecinto(1L);
+		ejemplarDto.setId(1L);
+		ejemplarDto.setNombre("Pterodactylus");
+		assertNotNull(ejemplarService.updateEjemplarObj(ejemplarDto));
+	}
+	
+	@Test
+	@DisplayName("Delete ejemplar")
+	public void testDeleteNoExist() throws MiValidationException {
+		ejemplarService.deleteEjemplar(10L);
 	}
 }

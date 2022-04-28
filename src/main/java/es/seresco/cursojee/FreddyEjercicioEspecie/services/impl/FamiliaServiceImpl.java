@@ -28,6 +28,12 @@ public class FamiliaServiceImpl implements FamiliaService{
 		log.info("Usando bean {}, para obtener familia {}", BEAN_NAME, idFamilia);
 		return familiaMapper.familiaToFamiliaDto(familiaRepository.getById(idFamilia));
 	}
+	
+	@Override
+	public Familia getFamiliaObj(Long idFamilia) {
+		log.info("Usando bean {}, para obtener familia {}", BEAN_NAME, idFamilia);
+		return familiaRepository.getById(idFamilia);
+	}
 
 	@Override
 	public FamiliaDto create(NewFamiliaDto newFamilia) {
@@ -51,6 +57,15 @@ public class FamiliaServiceImpl implements FamiliaService{
 		familiaRepository.save(familia);
 		return familiaMapper.familiaToFamiliaDto(familia);
 	}
+	
+	@Override
+	public Familia updateFamiliaObj(Long idFamilia, NewFamiliaDto updatedFamilia) {
+		log.info("Usando bean {}, para actualizar familia {}", BEAN_NAME,idFamilia);
+		Familia familia=familiaRepository.getById(idFamilia);
+		familia=familiaMapper.newFamiliaDtoToFamilia(updatedFamilia);
+		familiaRepository.save(familia);
+		return familia;
+	}
 
 	@Override
 	public FamiliaDto updateFamilia(FamiliaDto updatedFamilia) {
@@ -58,11 +73,17 @@ public class FamiliaServiceImpl implements FamiliaService{
 		familiaRepository.save(familia);
 		return familiaMapper.familiaToFamiliaDto(familia);
 	}
+	
+	@Override
+	public Familia updateFamiliaObj(FamiliaDto updatedFamilia) {
+		Familia familia=familiaMapper.familiaDtoToFamilia(updatedFamilia);
+		familiaRepository.save(familia);
+		return familia;
+	}
 
 	@Override
 	public void deleteFamilia(Long idFamilia){
 		Familia familia=familiaRepository.getById(idFamilia);
 		familiaRepository.delete(familia);
-		
 	}
 }

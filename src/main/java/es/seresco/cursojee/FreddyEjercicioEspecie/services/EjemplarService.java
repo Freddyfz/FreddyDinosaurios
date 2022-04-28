@@ -26,4 +26,10 @@ public interface EjemplarService {
 	List<Ejemplar> getByIdRecinto(Long idRecinto);
 
 	Ejemplar createObj(NewEjemplarDto newEjemplar);
+
+	Ejemplar getEjemplarObj(Long idEjemplar);
+
+	Ejemplar updateEjemplarObj(EjemplarDto updatedEjemplar) throws MiValidationException;
+
+	Ejemplar updateEjemplarObj(Long idEjemplar, NewEjemplarDto updatedEjemplar) throws MiValidationException;
 }

@@ -67,6 +67,22 @@ public class EspecieServiceImpl implements EspecieService{
 	}
 
 	@Override
+	public Especie updateEspecieObj(Long idEspecie, NewEspecieDto updatedEspecie) throws MiValidationException {
+		log.info("Usando bean {}, para actualizar especie {}", BEAN_NAME,idEspecie);
+		Especie especie=especieRepository.getById(idEspecie);
+		especie=especieMapper.newEspecieDtoToEspecie(updatedEspecie);
+		especieRepository.save(especie);
+		return especie;
+	}
+
+	@Override
+	public Especie updateEspecieObj(EspecieDto updatedEspecie) throws MiValidationException {
+		Especie especie=especieMapper.especieDtoToEspecie(updatedEspecie);
+		especieRepository.save(especie);
+		return especie;
+	}
+	
+	@Override
 	public void deleteEspecie(Long idEspecie) {
 		Especie especie=especieRepository.getById(idEspecie);
 		especieRepository.delete(especie);

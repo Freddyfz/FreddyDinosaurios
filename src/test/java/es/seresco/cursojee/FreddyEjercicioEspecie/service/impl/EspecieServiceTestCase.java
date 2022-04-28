@@ -16,8 +16,10 @@ import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import es.seresco.cursojee.FreddyEjercicioEspecie.controller.dto.EspecieDto;
+import es.seresco.cursojee.FreddyEjercicioEspecie.controller.dto.NewEspecieDto;
 import es.seresco.cursojee.FreddyEjercicioEspecie.core.Application;
 import es.seresco.cursojee.FreddyEjercicioEspecie.exceptions.MiValidationException;
+import es.seresco.cursojee.FreddyEjercicioEspecie.model.Especie;
 import es.seresco.cursojee.FreddyEjercicioEspecie.services.EspecieService;
 
 @RunWith(SpringRunner.class)
@@ -35,5 +37,45 @@ public class EspecieServiceTestCase extends AbstractServiceTestCase{
 		List<EspecieDto> resultado= especieService.findEspecies();
 		assertNotNull(resultado);
 		assertEquals("Se esperan 8 especies", 8, resultado.size());
+	}
+	
+	@Test
+	@DisplayName("Obtener especie por id")
+	public void testGet() throws MiValidationException {
+		Especie especie=especieService.getEspecieObj(1L);
+		assertNotNull(especie);
+	}
+	
+	@Test
+	@DisplayName("Crear una especie")
+	public void testCreate() throws MiValidationException {
+		NewEspecieDto newEspecieDto=new NewEspecieDto();
+		newEspecieDto.setIdFamilia(1L);
+		newEspecieDto.setNombre("Aerodactilos");
+		assertNotNull(especieService.create(newEspecieDto));
+	}
+	
+	@Test
+	@DisplayName("Update id, newEspecieDto")
+	public void testUpdate() throws MiValidationException {
+		NewEspecieDto newEspecieDto=new NewEspecieDto();
+		newEspecieDto.setIdFamilia(1L);
+		newEspecieDto.setNombre("Aerodactilos");
+		assertNotNull(especieService.updateEspecieObj(1L,newEspecieDto));
+	}
+	
+	@Test
+	@DisplayName("Update EspecieDto")
+	public void testUpdateDto() throws MiValidationException {
+		EspecieDto EspecieDto=new EspecieDto();
+		EspecieDto.setId(1L);
+		EspecieDto.setNombre("Pterodactylus");
+		assertNotNull(especieService.updateEspecieObj(EspecieDto));
+	}
+	
+	@Test
+	@DisplayName("Delete especie")
+	public void testDeleteNoExist() throws MiValidationException {
+		especieService.deleteEspecie(10L);
 	}
 }

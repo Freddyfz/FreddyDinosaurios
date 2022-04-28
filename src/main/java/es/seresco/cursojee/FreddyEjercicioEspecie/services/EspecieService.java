@@ -24,4 +24,8 @@ public interface EspecieService {
 	void deleteEspecie(Long idEspecie);
 
 	Especie getEspecieObj(Long idEspecie);
+
+	Especie updateEspecieObj(Long idEspecie, NewEspecieDto updatedEspecie) throws MiValidationException;
+
+	Especie updateEspecieObj(EspecieDto updatedEspecie) throws MiValidationException;
 }
