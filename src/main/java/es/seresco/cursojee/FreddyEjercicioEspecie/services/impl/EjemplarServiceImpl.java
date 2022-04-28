@@ -52,7 +52,7 @@ public class EjemplarServiceImpl implements EjemplarService{
 			ejemplar.setRecinto(recintoService.getRecintoObj(newEjemplar.getIdRecinto()));
 			ejemplar.setEspecie(especieService.getEspecieObj(newEjemplar.getIdEspecie()));
 			//Comprobamos que coinciden el tipo alimentacion de la especie y del recinto
-			if(especieTipoAlimentacionService.getByIdEspecie(ejemplar.getEspecie().getId())!=null&&especieTipoAlimentacionService.getByIdTipoAlimentacion(ejemplarRepository.getTipoAlimentacin(ejemplar.getRecinto().getId()).getId())!=null) {
+			if(especieTipoAlimentacionService.getByIdEspecie(ejemplar.getEspecie().getId())!=null&&especieTipoAlimentacionService.getByIdTipoAlimentacion(ejemplarRepository.getTipoAlimentacion(ejemplar.getRecinto().getId()).getId())!=null) {
 				//Comprobamos que hay sitio disponible en el recinto
 				if(ejemplarRepository.getByRecintoId(ejemplar.getRecinto().getId()).size()<4 && ejemplarRepository.getByRecintoId(ejemplar.getRecinto().getId()).size()>=0) {
 					ejemplar.getRecinto().setAnimales(ejemplar.getRecinto().getAnimales()+1);
@@ -73,10 +73,9 @@ public class EjemplarServiceImpl implements EjemplarService{
 			ejemplar.setRecinto(recintoService.getRecintoObj(newEjemplar.getIdRecinto()));
 			ejemplar.setEspecie(especieService.getEspecieObj(newEjemplar.getIdEspecie()));
 			//Comprobamos que coinciden el tipo alimentacion de la especie y del recinto
-			if(especieTipoAlimentacionService.getByIdEspecie(ejemplar.getEspecie().getId())!=null&&especieTipoAlimentacionService.getByIdTipoAlimentacion(ejemplarRepository.getTipoAlimentacin(ejemplar.getRecinto().getId()).getId())!=null) {
+			if(especieTipoAlimentacionService.getByIdEspecie(newEjemplar.getIdEspecie()).equals(especieTipoAlimentacionService.getByIdTipoAlimentacion(ejemplarRepository.getTipoAlimentacion(newEjemplar.getIdRecinto()).getId()))) {
 				//Comprobamos que hay sitio disponible en el recinto
 				if(ejemplarRepository.getByRecintoId(ejemplar.getRecinto().getId()).size()<4 && ejemplarRepository.getByRecintoId(ejemplar.getRecinto().getId()).size()>=0) {
-					
 					ejemplarRepository.save(ejemplar);
 					return ejemplar;
 				}
@@ -96,7 +95,7 @@ public class EjemplarServiceImpl implements EjemplarService{
 		log.info("Usando bean {}, para actualizar ejemplar {}", BEAN_NAME,idEjemplar);
 		Ejemplar ejemplar=ejemplarRepository.getById(idEjemplar);
 		ejemplar=ejemplarMapper.newEjemplarDtoToEjemplar(updatedEjemplar);
-		if(especieTipoAlimentacionService.getByIdEspecie(ejemplar.getEspecie().getId())!=null&&especieTipoAlimentacionService.getByIdTipoAlimentacion(ejemplarRepository.getTipoAlimentacin(ejemplar.getRecinto().getId()).getId())!=null) {
+		if(especieTipoAlimentacionService.getByIdEspecie(ejemplar.getEspecie().getId())!=null&&especieTipoAlimentacionService.getByIdTipoAlimentacion(ejemplarRepository.getTipoAlimentacion(ejemplar.getRecinto().getId()).getId())!=null) {
 			if(ejemplarRepository.getByRecintoId(ejemplar.getRecinto().getId()).size()<4 && ejemplarRepository.getByRecintoId(ejemplar.getRecinto().getId()).size()>=0) {
 				ejemplarRepository.save(ejemplar);
 				return ejemplarMapper.ejemplarToEjemplarDto(ejemplar);
@@ -108,7 +107,7 @@ public class EjemplarServiceImpl implements EjemplarService{
 	@Override
 	public EjemplarDto updateEjemplar(EjemplarDto updatedEjemplar) throws MiValidationException {
 		Ejemplar ejemplar=ejemplarMapper.ejemplarDtoToEjemplar(updatedEjemplar);
-		if(especieTipoAlimentacionService.getByIdEspecie(ejemplar.getEspecie().getId())!=null&&especieTipoAlimentacionService.getByIdTipoAlimentacion(ejemplarRepository.getTipoAlimentacin(ejemplar.getRecinto().getId()).getId())!=null) {
+		if(especieTipoAlimentacionService.getByIdEspecie(ejemplar.getEspecie().getId())!=null&&especieTipoAlimentacionService.getByIdTipoAlimentacion(ejemplarRepository.getTipoAlimentacion(ejemplar.getRecinto().getId()).getId())!=null) {
 			if(ejemplarRepository.getByRecintoId(ejemplar.getRecinto().getId()).size()<4 && ejemplarRepository.getByRecintoId(ejemplar.getRecinto().getId()).size()>=0) {
 				ejemplarRepository.save(ejemplar);
 				return ejemplarMapper.ejemplarToEjemplarDto(ejemplar);

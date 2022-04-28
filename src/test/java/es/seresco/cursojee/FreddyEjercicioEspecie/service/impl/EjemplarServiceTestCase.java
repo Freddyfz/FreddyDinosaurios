@@ -43,9 +43,20 @@ public class EjemplarServiceTestCase extends AbstractServiceTestCase{
 	public void testCreateDisp()throws MiValidationException{
 		NewEjemplarDto newEjemplarDto=new NewEjemplarDto();
 		newEjemplarDto.setNombre("Juanjo");
-		newEjemplarDto.setIdRecinto(6L);
+		newEjemplarDto.setIdRecinto(7L);
 		newEjemplarDto.setIdEspecie(2L);
 		newEjemplarDto.setSexo("MACHO");
 		assertNotNull(ejemplarService.createObj(newEjemplarDto));
+	}
+	
+	@Test
+	@DisplayName("Crear ejemplar con recinto disponible pero de otro tipo de comida")
+	public void testCreateDispCarn()throws MiValidationException{
+		NewEjemplarDto newEjemplarDto=new NewEjemplarDto();
+		newEjemplarDto.setNombre("Juanjo");
+		newEjemplarDto.setIdRecinto(5L);
+		newEjemplarDto.setIdEspecie(2L);
+		newEjemplarDto.setSexo("MACHO");
+		assertNull(ejemplarService.createObj(newEjemplarDto));
 	}
 }
