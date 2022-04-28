@@ -42,14 +42,11 @@ public class EjemplarServiceImpl implements EjemplarService{
 	@Override
 	public EjemplarDto create(NewEjemplarDto newEjemplar) {
 		log.info("Usando bean {}, para crear ejemplar", BEAN_NAME);
-		//Comprobamos que newEjemplar tenga los atributos de las ids
 		if(newEjemplar.getIdRecinto()!=null&&newEjemplar.getIdEspecie()!=null) {
 			Ejemplar ejemplar=ejemplarMapper.newEjemplarDtoToEjemplar(newEjemplar);
 			ejemplar.setRecinto(recintoService.getRecintoObj(newEjemplar.getIdRecinto()));
 			ejemplar.setEspecie(especieService.getEspecieObj(newEjemplar.getIdEspecie()));
-			//Comprobamos que hay sitio disponible en el recinto
 			if(ejemplarRepository.getByRecintoId(ejemplar.getRecinto().getId()).size()<4 && ejemplarRepository.getByRecintoId(ejemplar.getRecinto().getId()).size()>=0) {
-				//Comprobamos que coinciden el tipo alimentacion de la especie y del recinto
 				if(ejemplarRepository.comprobarTipoAlimentacionEspecie(newEjemplar.getIdEspecie())==ejemplarRepository.comprobarTipoAlimentacionRecinto(newEjemplar.getIdRecinto())) {
 					ejemplarRepository.save(ejemplar);
 					return ejemplarMapper.ejemplarToEjemplarDto(ejemplar);
