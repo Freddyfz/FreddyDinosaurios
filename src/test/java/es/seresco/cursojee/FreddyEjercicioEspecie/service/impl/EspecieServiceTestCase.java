@@ -56,24 +56,6 @@ public class EspecieServiceTestCase extends AbstractServiceTestCase{
 	}
 	
 	@Test
-	@DisplayName("Update id, newEspecieDto")
-	public void testUpdate() throws MiValidationException {
-		NewEspecieDto newEspecieDto=new NewEspecieDto();
-		newEspecieDto.setIdFamilia(1L);
-		newEspecieDto.setNombre("Aerodactilos");
-		assertNotNull(especieService.updateEspecieObj(1L,newEspecieDto));
-	}
-	
-	@Test
-	@DisplayName("Update EspecieDto")
-	public void testUpdateDto() throws MiValidationException {
-		EspecieDto EspecieDto=new EspecieDto();
-		EspecieDto.setId(1L);
-		EspecieDto.setNombre("Pterodactylus");
-		assertNotNull(especieService.updateEspecieObj(EspecieDto));
-	}
-	
-	@Test
 	@DisplayName("Delete especie")
 	public void testDeleteNoExist() throws MiValidationException {
 		especieService.deleteEspecie(10L);
