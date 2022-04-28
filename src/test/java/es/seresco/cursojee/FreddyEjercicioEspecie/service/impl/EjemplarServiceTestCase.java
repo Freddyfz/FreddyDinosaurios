@@ -59,5 +59,4 @@ public class EjemplarServiceTestCase extends AbstractServiceTestCase{
 		newEjemplarDto.setSexo("MACHO");
 		assertNotNull(ejemplarService.createObj(newEjemplarDto));
 	}
-	
 }

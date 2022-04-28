@@ -13,7 +13,6 @@ import es.seresco.cursojee.FreddyEjercicioEspecie.model.Ejemplar;
 import es.seresco.cursojee.FreddyEjercicioEspecie.repository.EjemplarRepository;
 import es.seresco.cursojee.FreddyEjercicioEspecie.services.EjemplarService;
 import es.seresco.cursojee.FreddyEjercicioEspecie.services.EspecieService;
-import es.seresco.cursojee.FreddyEjercicioEspecie.services.EspecieTipoAlimentacionService;
 import es.seresco.cursojee.FreddyEjercicioEspecie.services.RecintoService;
 import lombok.extern.slf4j.Slf4j;
 
@@ -26,9 +25,6 @@ public class EjemplarServiceImpl implements EjemplarService{
 
 	@Autowired
 	private EjemplarMapper ejemplarMapper;
-
-	@Autowired
-	private EspecieTipoAlimentacionService especieTipoAlimentacionService;
 
 	@Autowired
 	private EspecieService especieService;
@@ -51,13 +47,13 @@ public class EjemplarServiceImpl implements EjemplarService{
 			Ejemplar ejemplar=ejemplarMapper.newEjemplarDtoToEjemplar(newEjemplar);
 			ejemplar.setRecinto(recintoService.getRecintoObj(newEjemplar.getIdRecinto()));
 			ejemplar.setEspecie(especieService.getEspecieObj(newEjemplar.getIdEspecie()));
-			//Comprobamos que coinciden el tipo alimentacion de la especie y del recinto
-			if(especieTipoAlimentacionService.getByIdEspecie(ejemplar.getEspecie().getId())!=null&&especieTipoAlimentacionService.getByIdTipoAlimentacion(ejemplarRepository.getTipoAlimentacion(ejemplar.getRecinto().getId()).getId())!=null) {
-				//Comprobamos que hay sitio disponible en el recinto
-				if(ejemplarRepository.getByRecintoId(ejemplar.getRecinto().getId()).size()<4 && ejemplarRepository.getByRecintoId(ejemplar.getRecinto().getId()).size()>=0) {
-					ejemplar.getRecinto().setAnimales(ejemplar.getRecinto().getAnimales()+1);
+			//Comprobamos que hay sitio disponible en el recinto
+			if(ejemplarRepository.getByRecintoId(ejemplar.getRecinto().getId()).size()<4 && ejemplarRepository.getByRecintoId(ejemplar.getRecinto().getId()).size()>=0) {
+				//Comprobamos que coinciden el tipo alimentacion de la especie y del recinto
+				if(ejemplarRepository.comprobarTipoAlimentacionEspecie(newEjemplar.getIdEspecie())==ejemplarRepository.comprobarTipoAlimentacionRecinto(newEjemplar.getIdRecinto())) {
 					ejemplarRepository.save(ejemplar);
 					return ejemplarMapper.ejemplarToEjemplarDto(ejemplar);
+
 				}
 			}
 		}
@@ -67,14 +63,11 @@ public class EjemplarServiceImpl implements EjemplarService{
 	@Override
 	public Ejemplar createObj(NewEjemplarDto newEjemplar) {
 		log.info("Usando bean {}, para crear ejemplar", BEAN_NAME);
-		//Comprobamos que newEjemplar tenga los atributos de las ids
 		if(newEjemplar.getIdRecinto()!=null&&newEjemplar.getIdEspecie()!=null) {
 			Ejemplar ejemplar=ejemplarMapper.newEjemplarDtoToEjemplar(newEjemplar);
 			ejemplar.setRecinto(recintoService.getRecintoObj(newEjemplar.getIdRecinto()));
 			ejemplar.setEspecie(especieService.getEspecieObj(newEjemplar.getIdEspecie()));
-			//Comprobamos que hay sitio disponible en el recinto
 			if(ejemplarRepository.getByRecintoId(ejemplar.getRecinto().getId()).size()<4 && ejemplarRepository.getByRecintoId(ejemplar.getRecinto().getId()).size()>=0) {
-				//Comprobamos que coinciden el tipo alimentacion de la especie y del recinto
 				if(ejemplarRepository.comprobarTipoAlimentacionEspecie(newEjemplar.getIdEspecie())==ejemplarRepository.comprobarTipoAlimentacionRecinto(newEjemplar.getIdRecinto())) {
 					ejemplarRepository.save(ejemplar);
 					return ejemplar;
@@ -96,8 +89,8 @@ public class EjemplarServiceImpl implements EjemplarService{
 		log.info("Usando bean {}, para actualizar ejemplar {}", BEAN_NAME,idEjemplar);
 		Ejemplar ejemplar=ejemplarRepository.getById(idEjemplar);
 		ejemplar=ejemplarMapper.newEjemplarDtoToEjemplar(updatedEjemplar);
-		if(especieTipoAlimentacionService.getByIdEspecie(ejemplar.getEspecie().getId())!=null&&especieTipoAlimentacionService.getByIdTipoAlimentacion(ejemplarRepository.getTipoAlimentacion(ejemplar.getRecinto().getId()).getId())!=null) {
-			if(ejemplarRepository.getByRecintoId(ejemplar.getRecinto().getId()).size()<4 && ejemplarRepository.getByRecintoId(ejemplar.getRecinto().getId()).size()>=0) {
+		if(ejemplarRepository.getByRecintoId(ejemplar.getRecinto().getId()).size()<4 && ejemplarRepository.getByRecintoId(ejemplar.getRecinto().getId()).size()>=0) {
+			if(ejemplarRepository.comprobarTipoAlimentacionEspecie(updatedEjemplar.getIdEspecie())==ejemplarRepository.comprobarTipoAlimentacionRecinto(updatedEjemplar.getIdRecinto())) {
 				ejemplarRepository.save(ejemplar);
 				return ejemplarMapper.ejemplarToEjemplarDto(ejemplar);
 			}
@@ -108,8 +101,8 @@ public class EjemplarServiceImpl implements EjemplarService{
 	@Override
 	public EjemplarDto updateEjemplar(EjemplarDto updatedEjemplar) throws MiValidationException {
 		Ejemplar ejemplar=ejemplarMapper.ejemplarDtoToEjemplar(updatedEjemplar);
-		if(especieTipoAlimentacionService.getByIdEspecie(ejemplar.getEspecie().getId())!=null&&especieTipoAlimentacionService.getByIdTipoAlimentacion(ejemplarRepository.getTipoAlimentacion(ejemplar.getRecinto().getId()).getId())!=null) {
-			if(ejemplarRepository.getByRecintoId(ejemplar.getRecinto().getId()).size()<4 && ejemplarRepository.getByRecintoId(ejemplar.getRecinto().getId()).size()>=0) {
+		if(ejemplarRepository.getByRecintoId(ejemplar.getRecinto().getId()).size()<4 && ejemplarRepository.getByRecintoId(ejemplar.getRecinto().getId()).size()>=0) {
+			if(ejemplarRepository.comprobarTipoAlimentacionEspecie(updatedEjemplar.getIdEspecie())==ejemplarRepository.comprobarTipoAlimentacionRecinto(updatedEjemplar.getIdRecinto())) {
 				ejemplarRepository.save(ejemplar);
 				return ejemplarMapper.ejemplarToEjemplarDto(ejemplar);
 			}
