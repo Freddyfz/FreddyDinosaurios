@@ -29,6 +29,12 @@ public class EspecieTipoAlimentacionServiceImpl implements EspecieTipoAlimentaci
 		log.info("Usando bean {}, para obtener familia {}", BEAN_NAME, especieTipoAlimentacionPK);
 		return especieTipoAlimentacionMapper.especieTipoAlimentacionToEspecieTipoAlimentacionDto(especieTipoAlimentacionRepository.getById(especieTipoAlimentacionPK));
 	}
+	
+	@Override
+	public EspecieTipoAlimentacion getEspecieTipoAlimentacionObj(EspecieTipoAlimentacionPK especieTipoAlimentacionPK) {
+		log.info("Usando bean {}, para obtener familia {}", BEAN_NAME, especieTipoAlimentacionPK);
+		return especieTipoAlimentacionRepository.getById(especieTipoAlimentacionPK);
+	}
 
 	@Override
 	public EspecieTipoAlimentacionDto create(EspecieTipoAlimentacion especieTipoAlimentacion) {

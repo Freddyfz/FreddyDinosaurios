@@ -85,6 +85,8 @@ public class EjemplarServiceTestCase extends AbstractServiceTestCase{
 	public void testUpdate() throws MiValidationException {
 		NewEjemplarDto newEjemplarDto=new NewEjemplarDto();
 		newEjemplarDto.setNombre("Aerodactilos");
+		newEjemplarDto.setIdEspecie(1L);
+		newEjemplarDto.setIdRecinto(6L);
 		assertNotNull(ejemplarService.updateEjemplarObj(1L,newEjemplarDto));
 	}
 	
@@ -93,7 +95,7 @@ public class EjemplarServiceTestCase extends AbstractServiceTestCase{
 	public void testUpdateDto() throws MiValidationException {
 		EjemplarDto ejemplarDto=new EjemplarDto();
 		ejemplarDto.setIdEspecie(1L);
-		ejemplarDto.setIdRecinto(1L);
+		ejemplarDto.setIdRecinto(6L);
 		ejemplarDto.setId(1L);
 		ejemplarDto.setNombre("Pterodactylus");
 		assertNotNull(ejemplarService.updateEjemplarObj(ejemplarDto));

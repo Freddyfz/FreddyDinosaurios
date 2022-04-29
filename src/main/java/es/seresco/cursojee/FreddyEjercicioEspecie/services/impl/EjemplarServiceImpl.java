@@ -91,6 +91,8 @@ public class EjemplarServiceImpl implements EjemplarService{
 		log.info("Usando bean {}, para actualizar ejemplar {}", BEAN_NAME,idEjemplar);
 		Ejemplar ejemplar=ejemplarRepository.getById(idEjemplar);
 		ejemplar=ejemplarMapper.newEjemplarDtoToEjemplar(updatedEjemplar);
+		ejemplar.setEspecie(especieService.getEspecieObj(updatedEjemplar.getIdEspecie()));
+		ejemplar.setRecinto(recintoService.getRecintoObj(updatedEjemplar.getIdRecinto()));
 		if(ejemplarRepository.getByRecintoId(ejemplar.getRecinto().getId()).size()<4 && ejemplarRepository.getByRecintoId(ejemplar.getRecinto().getId()).size()>=0) {
 			if(ejemplarRepository.comprobarTipoAlimentacionEspecie(updatedEjemplar.getIdEspecie())==ejemplarRepository.comprobarTipoAlimentacionRecinto(updatedEjemplar.getIdRecinto())) {
 				ejemplarRepository.save(ejemplar);
@@ -103,6 +105,8 @@ public class EjemplarServiceImpl implements EjemplarService{
 	@Override
 	public EjemplarDto updateEjemplar(EjemplarDto updatedEjemplar) throws MiValidationException {
 		Ejemplar ejemplar=ejemplarMapper.ejemplarDtoToEjemplar(updatedEjemplar);
+		ejemplar.setEspecie(especieService.getEspecieObj(updatedEjemplar.getIdEspecie()));
+		ejemplar.setRecinto(recintoService.getRecintoObj(updatedEjemplar.getIdRecinto()));
 		if(ejemplarRepository.getByRecintoId(ejemplar.getRecinto().getId()).size()<4 && ejemplarRepository.getByRecintoId(ejemplar.getRecinto().getId()).size()>=0) {
 			if(ejemplarRepository.comprobarTipoAlimentacionEspecie(updatedEjemplar.getIdEspecie())==ejemplarRepository.comprobarTipoAlimentacionRecinto(updatedEjemplar.getIdRecinto())) {
 				ejemplarRepository.save(ejemplar);
@@ -117,6 +121,8 @@ public class EjemplarServiceImpl implements EjemplarService{
 		log.info("Usando bean {}, para actualizar ejemplar {}", BEAN_NAME,idEjemplar);
 		Ejemplar ejemplar=ejemplarRepository.getById(idEjemplar);
 		ejemplar=ejemplarMapper.newEjemplarDtoToEjemplar(updatedEjemplar);
+		ejemplar.setEspecie(especieService.getEspecieObj(updatedEjemplar.getIdEspecie()));
+		ejemplar.setRecinto(recintoService.getRecintoObj(updatedEjemplar.getIdRecinto()));
 		if(ejemplarRepository.getByRecintoId(ejemplar.getRecinto().getId()).size()<4 && ejemplarRepository.getByRecintoId(ejemplar.getRecinto().getId()).size()>=0) {
 			if(ejemplarRepository.comprobarTipoAlimentacionEspecie(updatedEjemplar.getIdEspecie())==ejemplarRepository.comprobarTipoAlimentacionRecinto(updatedEjemplar.getIdRecinto())) {
 				ejemplarRepository.save(ejemplar);
@@ -129,6 +135,8 @@ public class EjemplarServiceImpl implements EjemplarService{
 	@Override
 	public Ejemplar updateEjemplarObj(EjemplarDto updatedEjemplar) throws MiValidationException {
 		Ejemplar ejemplar=ejemplarMapper.ejemplarDtoToEjemplar(updatedEjemplar);
+		ejemplar.setEspecie(especieService.getEspecieObj(updatedEjemplar.getIdEspecie()));
+		ejemplar.setRecinto(recintoService.getRecintoObj(updatedEjemplar.getIdRecinto()));
 		if(ejemplarRepository.getByRecintoId(ejemplar.getRecinto().getId()).size()<4 && ejemplarRepository.getByRecintoId(ejemplar.getRecinto().getId()).size()>=0) {
 			if(ejemplarRepository.comprobarTipoAlimentacionEspecie(updatedEjemplar.getIdEspecie())==ejemplarRepository.comprobarTipoAlimentacionRecinto(updatedEjemplar.getIdRecinto())) {
 				ejemplarRepository.save(ejemplar);

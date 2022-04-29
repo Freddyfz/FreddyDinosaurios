@@ -16,7 +16,6 @@ public interface RecintoMapper {
 	@Mapping(source="codigo",target="codigo")
 	@Mapping(source="descripcion",target="descripcion")
 	@Mapping(source="idTipoAlimentacion",target="tipoAlimentacion.id")
-	@Mapping(source="animales",target="animales")
 	public Recinto newRecintoDtoToRecinto(NewRecintoDto newRecintoDto);
 	
 	@InheritInverseConfiguration

@@ -41,6 +41,14 @@ public class TipoAlimentacionServiceImpl implements TipoAlimentacionService{
 		tipoAlimentacionRepository.save(tipoAlimentacion);
 		return tipoAlimentacionMapper.tipoAlimentacionToTipoAlimentacionDto(tipoAlimentacion);
 	}
+	
+	@Override
+	public TipoAlimentacion createObj(NewTipoAlimentacionDto newTipoAlimentacion) {
+		log.info("Usando bean {}, para crear tipoAlimentacion", BEAN_NAME);
+		TipoAlimentacion tipoAlimentacion=tipoAlimentacionMapper.newTipoAlimentacionDtoToTipoAlimentacion(newTipoAlimentacion);
+		tipoAlimentacionRepository.save(tipoAlimentacion);
+		return tipoAlimentacion;
+	}
 
 	@Override
 	public List<TipoAlimentacionDto> findTipoAlimentaciones() {
@@ -56,12 +64,28 @@ public class TipoAlimentacionServiceImpl implements TipoAlimentacionService{
 		tipoAlimentacionRepository.save(tipoAlimentacion);
 		return tipoAlimentacionMapper.tipoAlimentacionToTipoAlimentacionDto(tipoAlimentacion);
 	}
+	
+	@Override
+	public TipoAlimentacion updateTipoAlimentacionObj(Long idTipoAlimentacion, NewTipoAlimentacionDto updatedTipoAlimentacion) {
+		log.info("Usando bean {}, para actualizar tipoAlimentacion {}", BEAN_NAME,idTipoAlimentacion);
+		TipoAlimentacion tipoAlimentacion=tipoAlimentacionRepository.getById(idTipoAlimentacion);
+		tipoAlimentacion=tipoAlimentacionMapper.newTipoAlimentacionDtoToTipoAlimentacion(updatedTipoAlimentacion);
+		tipoAlimentacionRepository.save(tipoAlimentacion);
+		return tipoAlimentacion;
+	}
 
 	@Override
 	public TipoAlimentacionDto updateTipoAlimentacion(TipoAlimentacionDto updatedTipoAlimentacion) {
 		TipoAlimentacion tipoAlimentacion=tipoAlimentacionMapper.tipoAlimentacionDtoToTipoAlimentacion(updatedTipoAlimentacion);
 		tipoAlimentacionRepository.save(tipoAlimentacion);
 		return tipoAlimentacionMapper.tipoAlimentacionToTipoAlimentacionDto(tipoAlimentacion);
+	}
+	
+	@Override
+	public TipoAlimentacion updateTipoAlimentacionObj(TipoAlimentacionDto updatedTipoAlimentacion) {
+		TipoAlimentacion tipoAlimentacion=tipoAlimentacionMapper.tipoAlimentacionDtoToTipoAlimentacion(updatedTipoAlimentacion);
+		tipoAlimentacionRepository.save(tipoAlimentacion);
+		return tipoAlimentacion;
 	}
 
 	@Override

@@ -25,4 +25,10 @@ public interface TipoAlimentacionService {
 
 	TipoAlimentacion getTipoAlimentacionObj(Long idTipoAlimentacion);
 
+	TipoAlimentacion createObj(NewTipoAlimentacionDto newTipoAlimentacion);
+
+	TipoAlimentacion updateTipoAlimentacionObj(Long idTipoAlimentacion, NewTipoAlimentacionDto updatedTipoAlimentacion);
+
+	TipoAlimentacion updateTipoAlimentacionObj(TipoAlimentacionDto updatedTipoAlimentacion);
+
 }

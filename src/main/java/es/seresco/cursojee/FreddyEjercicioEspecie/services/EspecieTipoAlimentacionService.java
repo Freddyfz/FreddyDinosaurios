@@ -22,4 +22,6 @@ public interface EspecieTipoAlimentacionService {
 	EspecieTipoAlimentacion getByIdEspecie(Long idEspecie);
 
 	EspecieTipoAlimentacion getByIdTipoAlimentacion(Long idTipoAlimentacion);
+
+	EspecieTipoAlimentacion getEspecieTipoAlimentacionObj(EspecieTipoAlimentacionPK especieTipoAlimentacionPK);
 }
