@@ -8,8 +8,8 @@ logging:
 spring:
   datasource:
     url: jdbc:hsqldb:mem:test;sql.syntax_mys=true;
-    username: test
-    password: test
+    username: seresco
+    password: Seresco
     driver-class-name: org.hsqldb.jdbcDriver
   jpa:
     properties:

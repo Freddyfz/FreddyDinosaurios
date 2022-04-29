@@ -2,16 +2,18 @@ package es.seresco.cursojee.FreddyEjercicioEspecie.services;
 
 import java.util.List;
 
-import es.seresco.cursojee.FreddyEjercicioEspecie.controller.dto.EspecieTipoAlimentacionDto;
 import es.seresco.cursojee.FreddyEjercicioEspecie.controller.dto.NewTipoAlimentacionDto;
 import es.seresco.cursojee.FreddyEjercicioEspecie.controller.dto.TipoAlimentacionDto;
 import es.seresco.cursojee.FreddyEjercicioEspecie.exceptions.MiValidationException;
+import es.seresco.cursojee.FreddyEjercicioEspecie.model.TipoAlimentacion;
 
 public interface TipoAlimentacionService {
+	
+	public static final String BEAN_NAME = "TipoAlimentacionServiceImpl";
 
 	TipoAlimentacionDto getTipoAlimentacion(Long idTipoAlimentacion);
 	
-	TipoAlimentacionDto create(EspecieTipoAlimentacionDto newTipoAlimentacion);
+	TipoAlimentacionDto create(NewTipoAlimentacionDto newTipoAlimentacion);	
 	
 	List<TipoAlimentacionDto> findTipoAlimentaciones () throws MiValidationException;
 	
@@ -19,5 +21,8 @@ public interface TipoAlimentacionService {
 
 	TipoAlimentacionDto updateTipoAlimentacion(TipoAlimentacionDto updatedTipoAlimentacion) throws MiValidationException;
 
-	void deleteTipoAlimentacion(Long idTipoAlimentacion);	
+	void deleteTipoAlimentacion(Long idTipoAlimentacion);
+
+	TipoAlimentacion getTipoAlimentacionObj(Long idTipoAlimentacion);
+
 }

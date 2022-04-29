@@ -7,11 +7,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import es.seresco.cursojee.FreddyEjercicioEspecie.controller.dto.EspecieDto;
@@ -60,6 +63,29 @@ public class EspecieController {
 		} else {
 			return ResponseEntity.status(HttpStatus.OK).body(especiesEncontradas);
 		}
+	}
+	
+	@PutMapping(path = "/{idEspecie}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<EspecieDto> actualizaEspecieIdParam(@PathVariable Long idEspecie, @Validated @RequestBody NewEspecieDto updatedEspecie) throws MiValidationException {
+		
+		especieService.updateEspecie(idEspecie,updatedEspecie);
+		EspecieDto dto=especieService.getEspecie(idEspecie);
+		log.info("Especie actualizado");
+
+		return ResponseEntity.status(HttpStatus.OK).body(dto);
+	}
+	
+	@DeleteMapping(path = "/{idEspecie}", produces = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseStatus(HttpStatus.NO_CONTENT) 
+	public void deleteEspecie(@PathVariable Long idEspecie) throws MiValidationException {
+		especieService.deleteEspecie(idEspecie);
+	}
+	
+	@PutMapping(path = "", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<EspecieDto> actualizaEspecie(@Validated @RequestBody EspecieDto updatedEspecie) throws MiValidationException {
+		
+		especieService.updateEspecie(updatedEspecie);
+		return ResponseEntity.status(HttpStatus.OK).body(especieService.getEspecie(updatedEspecie.getId()));
 	}
 }
 

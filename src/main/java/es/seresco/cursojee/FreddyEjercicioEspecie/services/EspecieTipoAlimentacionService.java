@@ -4,18 +4,22 @@ import java.util.List;
 
 import es.seresco.cursojee.FreddyEjercicioEspecie.controller.dto.EspecieTipoAlimentacionDto;
 import es.seresco.cursojee.FreddyEjercicioEspecie.exceptions.MiValidationException;
+import es.seresco.cursojee.FreddyEjercicioEspecie.model.EspecieTipoAlimentacion;
+import es.seresco.cursojee.FreddyEjercicioEspecie.model.EspecieTipoAlimentacionPK;
 
 public interface EspecieTipoAlimentacionService {
-
-	EspecieTipoAlimentacionDto getEspecieTipoAlimentacion(Long idEspecieTipoAlimentacion);
 	
-	EspecieTipoAlimentacionDto create(Long idESpecie,Long idTipoAlimentacion);
+	public static final String BEAN_NAME = "EspecieTipoAlimentacionServiceImpl";
+
+	EspecieTipoAlimentacionDto getEspecieTipoAlimentacion(EspecieTipoAlimentacionPK especieTipoAlimentacionPK);
+	
+	EspecieTipoAlimentacionDto create(EspecieTipoAlimentacion especieTipoAlimentacion);
 	
 	List<EspecieTipoAlimentacionDto> findEspecieTipoAlimentaciones () throws MiValidationException;
-	
-	EspecieTipoAlimentacionDto updateEspecieTipoAlimentacion(Long idEspecieTipoAlimentacion, Long idEspecie, Long idTipoAlimentacion) throws MiValidationException;
 
-	EspecieTipoAlimentacionDto updateEspecieTipoAlimentacion(EspecieTipoAlimentacionDto updatedEspecieTipoAlimentacion) throws MiValidationException;
+	void deleteEspecieTipoAlimentacion(EspecieTipoAlimentacionPK especieTipoAlimentacionPK);
 
-	void deleteEspecieTipoAlimentacion(Long idEspecieTipoAlimentacion);
+	EspecieTipoAlimentacion getByIdEspecie(Long idEspecie);
+
+	EspecieTipoAlimentacion getByIdTipoAlimentacion(Long idTipoAlimentacion);
 }

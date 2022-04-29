@@ -3,16 +3,25 @@ package es.seresco.cursojee.FreddyEjercicioEspecie.model;
 import java.io.Serializable;
 
 import javax.persistence.Column;
-import javax.persistence.Embeddable;
 
-@Embeddable
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+
+@Getter
+@Setter
+@ToString
+@NoArgsConstructor
+@AllArgsConstructor
 public class EspecieTipoAlimentacionPK implements Serializable{
 	
 	private static final long serialVersionUID = 4076883394582048812L;
 
-	@Column(name="id_Especie")
+	@Column(name="ID_ESPECIE")
 	private Long idEspecie;
 	
-	@Column(name="id_Tipo_Alimentacion")
+	@Column(name="ID_TIPO_ALIMENTACION")
 	private Long idTipoAlimentacion;
 }

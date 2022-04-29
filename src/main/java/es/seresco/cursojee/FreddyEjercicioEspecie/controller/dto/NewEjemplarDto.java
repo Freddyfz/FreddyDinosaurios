@@ -11,11 +11,17 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class EspecieTipoAlimentacionDto {
+public class NewEjemplarDto {
 
 	@NotNull
 	private Long idEspecie;
+	
 	@NotNull
-	private Long idTipoAlimentacion;
-
+	private String nombre;
+	
+	@NotNull
+	private String sexo;
+	
+	@NotNull
+	private Long idRecinto;
 }

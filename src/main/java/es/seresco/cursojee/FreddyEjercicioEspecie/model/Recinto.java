@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import lombok.Getter;
@@ -19,16 +21,27 @@ import lombok.ToString;
 @ToString
 @NoArgsConstructor
 @Entity
-@Table(name = "TIPO_ALIMENTACION")
-public class TipoAlimentacion implements Serializable{
-
-	private static final long serialVersionUID = -4058798229966431708L;
-
+@Table(name = "RECINTO")
+public class Recinto implements Serializable{
+	
+	private static final long serialVersionUID = -6320392355168028530L;
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@Column(name="descripcion",length = 50)
+	
+	@Column(name = "CODIGO",length = 50)
+	private String codigo;
+	
+	@Column(name = "DESCRIPCION",length = 50)
 	private String descripcion;
 	
+	@ToString.Exclude
+	@ManyToOne
+	@JoinColumn(name = "ID_TIPO_ALIMENTACION")
+	private TipoAlimentacion tipoAlimentacion;
+	
+	@Column(name = "ANIMALES")
+	private int animales;
 }

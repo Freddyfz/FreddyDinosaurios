@@ -14,12 +14,7 @@ import es.seresco.cursojee.FreddyEjercicioEspecie.model.Familia;
 @Mapper(componentModel = "spring")
 public interface FamiliaMapper {
 
-	@Mapping(source="idFamilia",target="familia.id")
 	@Mapping(source="nombre",target="nombre")
-	@Mapping(source="codigoTipoPeligrosidad",target="codigoTipoPeligrosidad")
-	@Mapping(source="longitud",target="longitud")
-	@Mapping(source="anioDesde",target="anioDesde")
-	@Mapping(source="anioHasta",target="anioHasta")
 	public Familia newFamiliaDtoToFamilia(NewFamiliaDto newFamiliaDto);
 	
 	@InheritInverseConfiguration
