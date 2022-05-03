@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
 
 import es.seresco.cursojee.FreddyEjercicioEspecie.controller.dto.FamiliaDto;
 import es.seresco.cursojee.FreddyEjercicioEspecie.controller.dto.NewFamiliaDto;
@@ -21,6 +23,9 @@ import es.seresco.cursojee.FreddyEjercicioEspecie.exceptions.MiValidationExcepti
 import es.seresco.cursojee.FreddyEjercicioEspecie.services.FamiliaService;
 import lombok.extern.slf4j.Slf4j;
 
+
+@RestController
+@RequestMapping(path = "/api/familias")
 @Slf4j
 public class FamiliaController {
 

@@ -1,7 +1,7 @@
 package es.seresco.cursojee.FreddyEjercicioEspecie.service.impl;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.Assert.assertNotNull;
 
 import java.util.List;
 
